@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardzify - Soluții de Loialitate Digitale</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Custom Palette Provided -->
+    <!-- Application Structure Plan: Am transformat site-ul într-o aplicație single-page (SPA) care simulează o structură multi-pagină. Navigarea este gestionată de JavaScript, care afișează/ascunde secțiunile corespunzătoare fiecărei pagini (Homepage, Prețuri, Funcționalități etc.). Această abordare permite o experiență de navigare rapidă și fluidă, păstrând în același timp organizarea logică a unui site tradițional, esențială pentru a prezenta informații complexe și pentru a ghida diferite tipuri de utilizatori. -->
+    <!-- Visualization & Content Choices: Am folosit o varietate de elemente pentru a structura informația: 1. Prețuri -> Tabele de comparație -> Prezentare clară a opțiunilor -> HTML/Tailwind. 2. Soluții -> Sistem de tab-uri (Cafenele, Saloane) -> Mesaje personalizate pentru fiecare industrie -> JS pentru interactivitatea tab-urilor. 3. Integrări -> Grilă vizuală cu logo-uri -> Construirea încrederii și credibilități -> HTML/Tailwind. 4. Blog -> Carduri de articole -> Demonstrarea expertizei și strategie SEO -> HTML/Tailwind. Fiecare secțiune este concepută pentru a răspunde unui set specific de întrebări ale utilizatorilor. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+            color: #1E1B30;
+        }
+        .hero-bg {
+            background-color: #F8F9FA;
+            background-image: radial-gradient(#E2E8F0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px #C15866;
+        }
+        .page-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-link.active {
+            color: white;
+            font-weight: 600;
+        }
+        .pricing-card {
+            transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .testimonial-card {
+            background-color: #372E4F;
+        }
+        .business-btn.active {
+            border-color: #F25C54;
+            background-color: #FEF2F2;
+        }
+        .card-type-btn.active {
+            background-color: #372E4F;
+            color: white;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-[#2C2645]/90 backdrop-blur-md fixed top-0 left-0 right-0 z-50 transition-all duration-300 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-white">
+                <a href="#" class="nav-logo" data-page="home">Cardzify ✨</a>
+            </div>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#" class="nav-link text-gray-300 hover:text-white transition-colors" data-page="home">Acasă</a>
+                <a href="#" class="nav-link text-gray-300 hover:text-white transition-colors" data-page="functionalitati">Funcționalități</a>
+                <a href="#" class="nav-link text-gray-300 hover:text-white transition-colors" data-page="solutii">Soluții</a>
+                <a href="#" class="nav-link text-gray-300 hover:text-white transition-colors" data-page="integrari">Integrări</a>
+                <a href="#" class="nav-link text-gray-300 hover:text-white transition-colors" data-page="preturi">Prețuri</a>
+                <a href="#" class="nav-link text-gray-300 hover:text-white transition-colors" data-page="contact">Contact</a>
+                <a href="#" data-page="preturi" class="bg-[#F25C54] text-white px-4 py-2 rounded-lg shadow hover:bg-[#C15866] btn-primary">Creează card gratuit</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#2C2645] px-6 pb-4">
+            <a href="#" class="block py-2 text-gray-300 nav-link" data-page="home">Acasă</a>
+            <a href="#" class="block py-2 text-gray-300 nav-link" data-page="functionalitati">Funcționalități</a>
+            <a href="#" class="block py-2 text-gray-300 nav-link" data-page="solutii">Soluții</a>
+            <a href="#" class="block py-2 text-gray-300 nav-link" data-page="integrari">Integrări</a>
+            <a href="#" class="block py-2 text-gray-300 nav-link" data-page="preturi">Prețuri</a>
+            <a href="#" class="block py-2 text-gray-300 nav-link" data-page="contact">Contact</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+
+        <!-- Pagina Acasă -->
+        <div id="page-home" class="page-content">
+            <section class="hero-bg pt-12 pb-20 md:pt-20 md:pb-28 text-center">
+                <div class="container mx-auto px-6">
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-[#1E1B30] leading-tight mb-4">Transformă vizitatorii în <span class="text-[#F25C54]">clienți fideli.</span></h1>
+                    <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 mb-8">Creează carduri de loialitate digitale în câteva minute. Adu-ți clienții înapoi, înțelege-le preferințele și crește-ți afacerea cu Cardzify. Simplu, digital, eficient.</p>
+                    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#" data-page="preturi" class="bg-[#F25C54] text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-[#C15866] btn-primary w-full sm:w-auto">Vezi prețurile</a>
+                        <a href="#" data-page="functionalitati" class="bg-white text-[#2C2645] px-8 py-3 rounded-lg font-semibold text-lg border border-gray-300 hover:bg-gray-100 transition duration-300 w-full sm:w-auto">Descoperă funcționalități</a>
+                    </div>
+                </div>
+            </section>
+            <section class="py-20 bg-white">
+                 <div class="container mx-auto px-6">
+                     <div class="text-center max-w-3xl mx-auto mb-16">
+                         <h2 class="text-3xl md:text-4xl font-bold text-[#1E1B30] mb-4">Un card de loialitate modern, exact pe gustul afacerii tale.</h2>
+                         <p class="text-lg text-gray-600">Personalizează designul, stabilește recompensele și oferă clienților tăi o experiență digitală pe care o vor iubi. Fără aplicații de instalat, compatibil direct cu Apple și Google Wallet.</p>
+                     </div>
+                     <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-start">
+                          <div class="mb-12 lg:mb-0">
+                             <div id="card-display" class="relative w-full max-w-md mx-auto aspect-[1.586] p-6 rounded-2xl shadow-2xl text-white flex flex-col justify-between transition-colors duration-500" style="background-color: #B49272;">
+                                 <div id="card-header" class="flex justify-between items-start"><div><h3 id="card-business-name" class="font-bold text-xl">The Coffee Bean</h3><p id="card-type-name" class="opacity-80 text-sm">Card cu Ștampile</p></div><div id="card-logo" class="text-4xl">☕</div></div>
+                                 <div id="card-visual-details" class="flex-grow flex items-center justify-center py-4"></div>
+                                 <div><p class="text-sm opacity-80 mb-1">Recompensă:</p><p id="card-reward" class="font-semibold text-lg">A 10-a cafea gratuită</p></div>
+                             </div>
+                              <div id="card-type-selector" class="max-w-md mx-auto mt-4 flex flex-wrap justify-center gap-2"></div>
+                              <div id="wallet-buttons-container" class="max-w-md mx-auto mt-6 flex flex-col sm:flex-row gap-3">
+                                <a href="#" class="flex items-center justify-center bg-black text-white px-4 py-3 rounded-lg font-semibold transition hover:bg-gray-800 w-full">
+                                    <span class="text-2xl mr-2"></span> Adaugă în Apple Wallet
+                                </a>
+                                <a href="#" class="flex items-center justify-center bg-white border border-gray-300 text-gray-800 px-4 py-3 rounded-lg font-semibold transition hover:bg-gray-100 w-full">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png" class="w-6 h-6 mr-2" alt="Google Logo"/> Adaugă în Google Wallet
+                                </a>
+                              </div>
+                         </div>
+                         <div class="flex flex-col space-y-6">
+                             <p class="text-lg font-semibold text-gray-700">Alege un tip de afacere:</p>
+                             <button data-business="cafenele" class="business-btn text-left p-6 border-2 rounded-lg hover:bg-gray-50 transition duration-300"><h4 class="text-xl font-bold mb-2 text-[#1E1B30]">☕ Pentru o cafenea</h4><p class="text-gray-600">Perfect pentru a recompensa clienții fideli cu băuturi gratuite.</p></button>
+                             <button data-business="saloane" class="business-btn text-left p-6 border-2 rounded-lg hover:bg-gray-50 transition duration-300"><h4 class="text-xl font-bold mb-2 text-[#1E1B30]">💅 Pentru un salon</h4><p class="text-gray-600">Oferă discounturi sau servicii bonus pentru a crește retenția.</p></button>
+                             <button data-business="restaurante" class="business-btn text-left p-6 border-2 rounded-lg hover:bg-gray-50 transition duration-300"><h4 class="text-xl font-bold mb-2 text-[#1E1B30]">🍕 Pentru un restaurant</h4><p class="text-gray-600">Atrage clienți noi cu oferte speciale și recompensează-i pe cei loiali.</p></button>
+                             <div class="text-center pt-2">
+                                <a href="#" data-page="functionalitati" class="nav-link text-sm text-gray-600 hover:text-[#F25C54] transition">...și multe altele! Descoperă toate cele 8 tipologii de carduri.</a>
+                            </div>
+                         </div>
+                     </div>
+                 </div>
+            </section>
+            <section class="py-20 bg-gray-50">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-3xl mx-auto mb-16"><h2 class="text-3xl md:text-4xl font-bold text-[#1E1B30] mb-4">Mai mult decât un card. Un partener pentru afacerea ta.</h2></div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-xl shadow-sm"><div class="text-4xl mb-4">📈</div><h3 class="text-xl font-bold mb-2">Adu-ți clienții înapoi, mai des.</h3><p class="text-gray-600">Motivează clienții să revină, trimițându-le oferte personalizate și notificări automate direct pe telefon, exact atunci când contează.</p></div>
+                        <div class="bg-white p-8 rounded-xl shadow-sm"><div class="text-4xl mb-4">📊</div><h3 class="text-xl font-bold mb-2">Înțelege ce își doresc clienții tăi.</h3><p class="text-gray-600">Acumulează date valoroase la fiecare scanare. Află cine sunt clienții tăi fideli, cât de des cumpără și ce produse preferă.</p></div>
+                        <div class="bg-white p-8 rounded-xl shadow-sm"><div class="text-4xl mb-4">💬</div><h3 class="text-xl font-bold mb-2">Construiește relații, în mod automat.</h3><p class="text-gray-600">De la mesaje de "Bun venit" până la oferte de ziua lor, Cardzify comunică automat cu clienții tăi, menținând o relație puternică.</p></div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-20 bg-white">
+                 <div class="container mx-auto px-6">
+                     <div class="text-center max-w-3xl mx-auto mb-16"><h2 class="text-3xl md:text-4xl font-bold text-[#1E1B30] mb-4">Gata de utilizare în 3 pași simpli</h2></div>
+                     <div class="relative"><div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -translate-y-1/2"></div>
+                         <div class="grid md:grid-cols-3 gap-12 relative">
+                             <div class="text-center p-6"><div class="flex items-center justify-center bg-[#F25C54]/20 text-[#F25C54] w-16 h-16 rounded-full mx-auto mb-4 text-2xl font-bold">1</div><h3 class="text-xl font-bold mb-2">Personalizează</h3><p class="text-gray-600">Alege culorile, adaugă logo-ul și setează recompensele. Gata în mai puțin de 5 minute.</p></div>
+                             <div class="text-center p-6"><div class="flex items-center justify-center bg-[#F25C54]/20 text-[#F25C54] w-16 h-16 rounded-full mx-auto mb-4 text-2xl font-bold">2</div><h3 class="text-xl font-bold mb-2">Distribuie</h3><p class="text-gray-600">Clienții scanează un cod QR și salvează cardul în telefon. Fără aplicații de descărcat.</p></div>
+                             <div class="text-center p-6"><div class="flex items-center justify-center bg-[#F25C54]/20 text-[#F25C54] w-16 h-16 rounded-full mx-auto mb-4 text-2xl font-bold">3</div><h3 class="text-xl font-bold mb-2">Fidelizează</h3><p class="text-gray-600">Scanează cardul la fiecare achiziție, trimite oferte și urmărește cum afacerea ta crește.</p></div>
+                         </div>
+                     </div>
+                 </div>
+            </section>
+
+             <!-- SECȚIUNEA RE-ADAUGATĂ -->
+            <section class="py-20 bg-gray-50 overflow-hidden">
+                <div class="container mx-auto px-6">
+                    <div class="grid lg:grid-cols-2 gap-16 items-center">
+                        <div class="relative lg:order-last">
+                            <div class="relative w-full h-96">
+                                <img src="https://placehold.co/280x170/B49272/FFFFFF?text=Card+Cafenea" alt="Card Loialitate Cafenea" class="absolute w-72 rounded-xl shadow-2xl transform rotate-6 top-0 left-1/4 lg:left-28 transition-transform hover:scale-105">
+                                <img src="https://placehold.co/280x170/D8A0A6/FFFFFF?text=Card+Salon" alt="Card Loialitate Salon" class="absolute w-72 rounded-xl shadow-2xl transform -rotate-8 top-24 left-0 lg:left-4 z-10 transition-transform hover:scale-105">
+                                <img src="https://placehold.co/280x170/E68673/FFFFFF?text=Card+Restaurant" alt="Card Loialitate Restaurant" class="absolute w-72 rounded-xl shadow-2xl transform rotate-3 top-48 left-1/3 lg:left-36 transition-transform hover:scale-105">
+                            </div>
+                        </div>
+                        <div class="lg:order-first">
+                            <h2 class="text-3xl md:text-4xl font-bold text-[#1E1B30] mb-6">Direct în telefon, fără aplicații.</h2>
+                            <p class="text-lg text-gray-600 mb-8">Clienții salvează cardul direct în Apple Wallet sau Google Wallet. Fără plastic, fără aplicații de instalat, cardul este mereu la îndemâna lor.</p>
+                            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                                <a href="#" class="flex items-center justify-center bg-black text-white px-6 py-3 rounded-lg font-semibold transition hover:bg-gray-800">
+                                    <span class="text-2xl mr-2"></span> Adaugă în Apple Wallet
+                                </a>
+                                <a href="#" class="flex items-center justify-center bg-white border border-gray-300 text-gray-800 px-6 py-3 rounded-lg font-semibold transition hover:bg-gray-100">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png" class="w-6 h-6 mr-2" alt="Google Logo"/> Adaugă în Google Wallet
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="py-20 bg-[#2C2645] text-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-3xl mx-auto mb-12"><h2 class="text-3xl md:text-4xl font-bold mb-4">Ce spun clienții noștri</h2></div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="testimonial-card p-8 rounded-lg"><p class="text-gray-300 mb-6 italic">"De când folosim Cardzify, am observat o creștere de 30% a clienților recurenți. Este incredibil de simplu de folosit atât pentru noi, cât și pentru clienți."</p><div><p class="font-bold">Ana Popescu</p><p class="text-sm text-[#A36C79]">Proprietar, The Coffee Bean</p></div></div>
+                        <div class="testimonial-card p-8 rounded-lg"><p class="text-gray-300 mb-6 italic">"Clientele mele iubesc cardul digital! Nu mai trebuie să-și facă griji că îl pierd. Funcția de notificări pentru oferte este un bonus extraordinar."</p><div><p class="font-bold">Elena Ionescu</p><p class="text-sm text-[#A36C79]">Manager, Glamour Studio</p></div></div>
+                        <div class="testimonial-card p-8 rounded-lg"><p class="text-gray-300 mb-6 italic">"Platforma ne-a ajutat să înțelegem mai bine ce își doresc oaspeții noștri. Acum putem crea oferte mult mai relevante. Recomand!"</p><div><p class="font-bold">Mihai Dinu</p><p class="text-sm text-[#A36C79]">Proprietar, Pizza Palace</p></div></div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-20 bg-gray-100 text-center">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#1E1B30] mb-4">Gata să-ți transformi afacerea?</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">Începe să construiești un program de loialitate pe care clienții tăi îl vor iubi. Alege planul potrivit pentru tine.</p>
+                    <a href="#" data-page="preturi" class="bg-[#F25C54] text-white px-8 py-3 rounded-lg font-semibold text-lg shadow-lg hover:bg-[#C15866] btn-primary">Vezi planurile și prețurile</a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Pagina Prețuri -->
+        <div id="page-preturi" class="page-content">
+            <section class="py-20 bg-gray-50">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-4xl font-bold text-[#1E1B30] mb-4">Planuri tarifare simple și transparente</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-12">Alege planul care se potrivește afacerii tale. Începe gratuit, fără niciun risc.</p>
+                    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                        <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-gray-300 pricing-card">
+                            <h3 class="text-2xl font-bold mb-4">Start</h3>
+                            <p class="text-4xl font-extrabold mb-4">0<span class="text-lg font-medium text-gray-500"> RON/lună</span></p>
+                            <p class="text-gray-600 mb-6 h-12">Perfect pentru a testa platforma.</p>
+                            <ul class="text-left space-y-3 mb-8">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Până la 50 de clienți</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>1 locație</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Design card standard</li>
+                            </ul>
+                            <a href="#" class="w-full block text-center bg-gray-200 text-gray-800 py-3 rounded-lg font-semibold">Începe gratuit</a>
+                        </div>
+                        <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-[#F25C54] pricing-card relative">
+                            <p class="absolute top-0 -translate-y-1/2 bg-[#F25C54] text-white px-4 py-1 rounded-full font-semibold">Cel mai popular</p>
+                            <h3 class="text-2xl font-bold mb-4">Pro</h3>
+                            <p class="text-4xl font-extrabold mb-4">129<span class="text-lg font-medium text-gray-500"> RON/lună</span></p>
+                            <p class="text-gray-600 mb-6 h-12">Soluția completă pentru creșterea afacerii tale.</p>
+                             <ul class="text-left space-y-3 mb-8">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Clienți nelimitați</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Până la 3 locații</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Personalizare avansată card</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Notificări Push</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Analiză & CRM</li>
+                            </ul>
+                            <a href="#" class="w-full block text-center bg-[#F25C54] text-white py-3 rounded-lg font-semibold hover:bg-[#C15866]">Alege Pro</a>
+                        </div>
+                        <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-gray-800 pricing-card">
+                            <h3 class="text-2xl font-bold mb-4">Enterprise</h3>
+                             <p class="text-4xl font-extrabold mb-4">Contact<span class="text-lg font-medium text-gray-500"></span></p>
+                            <p class="text-gray-600 mb-6 h-12">Pentru afaceri cu nevoi personalizate și multiple locații.</p>
+                             <ul class="text-left space-y-3 mb-8">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Totul din Pro</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Locații nelimitate</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Integrări custom</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">✔</span>Suport prioritar</li>
+                            </ul>
+                            <a href="#" data-page="contact" class="nav-link w-full block text-center bg-gray-800 text-white py-3 rounded-lg font-semibold">Contactează-ne</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Pagina Funcționalități -->
+        <div id="page-functionalitati" class="page-content">
+             <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-3xl mx-auto mb-16"><h2 class="text-4xl font-bold text-[#1E1B30] mb-4">Funcționalități create pentru succesul tău</h2><p class="text-lg text-gray-600">Descoperă instrumentele puternice care te ajută să construiești relații durabile cu clienții.</p></div>
+                    <div class="space-y-20">
+                        <div class="grid md:grid-cols-2 gap-12 items-center"><div class="pr-8"><h3 class="text-3xl font-bold mb-4">Personalizare completă a cardului</h3><p class="text-gray-600 leading-relaxed">Adaptează designul cardului digital pentru a se potrivi perfect cu brandul tău. Alege culorile, adaugă logo-ul și setează recompense unice care să-ți încânte clienții. Totul într-o interfață simplă și intuitivă.</p></div><div class="bg-gray-100 p-8 rounded-lg"><img src="https://placehold.co/500x300/F25C54/FFFFFF?text=Editor+Card" class="rounded-lg shadow-lg" alt="Editor de carduri digitale"></div></div>
+                        <div class="grid md:grid-cols-2 gap-12 items-center"><div class="bg-gray-100 p-8 rounded-lg md:order-last"><img src="https://placehold.co/500x300/2C2645/FFFFFF?text=Notificări+Push" class="rounded-lg shadow-lg" alt="Exemplu notificare push pe telefon"></div><div class="pr-8"><h3 class="text-3xl font-bold mb-4">Notificări Push inteligente</h3><p class="text-gray-600 leading-relaxed">Comunică direct cu clienții tăi prin notificări trimise pe ecranul telefonului. Anunță oferte speciale, recompense noi sau pur și simplu amintește-le să revină. Targetează segmente specifice de clienți pentru impact maxim.</p></div></div>
+                        <div class="grid md:grid-cols-2 gap-12 items-center"><div class="pr-8"><h3 class="text-3xl font-bold mb-4">Analiză & CRM simplificat</h3><p class="text-gray-600 leading-relaxed">Înțelege comportamentul clienților tăi. Vezi cine sunt cei mai fideli, cât de des revin și ce preferințe au. Folosește aceste date valoroase pentru a lua decizii de business mai bune și pentru a-ți personaliza ofertele.</p></div><div class="bg-gray-100 p-8 rounded-lg"><img src="https://placehold.co/500x300/8F8399/FFFFFF?text=Dashboard+Analiză" class="rounded-lg shadow-lg" alt="Dashboard cu statistici despre clienti"></div></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Pagina Soluții -->
+        <div id="page-solutii" class="page-content">
+             <section class="py-20 bg-gray-50">
+                 <div class="container mx-auto px-6">
+                    <div class="text-center max-w-3xl mx-auto mb-12"><h2 class="text-4xl font-bold text-[#1E1B30] mb-4">O soluție perfectă pentru industria ta</h2><p class="text-lg text-gray-600">Cardzify se adaptează nevoilor specifice ale afacerii tale. Descoperă cum te putem ajuta.</p></div>
+                     <div id="solutions-container"></div>
+                      <div class="container mx-auto px-6 mt-20">
+                        <div class="text-center max-w-3xl mx-auto mb-12">
+                            <h3 class="text-3xl md:text-4xl font-bold text-[#1E1B30] mb-4">Descoperă Tipurile Noastre de Carduri</h3>
+                            <p class="text-lg text-gray-600">Alege instrumentul de loialitate potrivit pentru obiectivele tale.</p>
+                        </div>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <div class="bg-white rounded-lg shadow-sm flex items-start p-6">
+                                <div class="text-4xl mr-4">🏆</div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">Rewardify</h4>
+                                    <p class="text-sm text-gray-600">Un sistem clasic de reduceri cu mai multe niveluri de câștig. Pe măsură ce clienții acumulează puncte sau îndeplinesc anumite criterii, pot accesa diferite niveluri de beneficii sau reduceri.</p>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg shadow-sm flex items-start p-6">
+                                <div class="text-4xl mr-4">🎟️</div>
+                                <div>
+                                    <h4 class="font-bold text-lg mb-1">Stampify</h4>
+                                    <p class="text-sm text-gray-600">Funcționează pe principiul "Cumpără 10 și primești al 11-lea cadou". Acest tip de card încurajează clienții să revină pentru a beneficia de recompense după un anumit număr de achiziții.</p>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Pagina Integrări -->
+        <div id="page-integrari" class="page-content">
+             <section class="py-20 bg-white">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-4xl font-bold text-[#1E1B30] mb-4">Se integrează în fluxul tău de lucru</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-16">Cardzify este conceput pentru a funcționa alături de sistemele pe care le folosești deja. Chiar dacă nu avem integrări directe, platforma este compatibilă și completează perfect cele mai populare sisteme POS.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                        <div class="p-6 bg-gray-100 rounded-lg flex items-center justify-center h-32"><span class="text-xl font-bold text-gray-700">Lightspeed</span></div>
+                        <div class="p-6 bg-gray-100 rounded-lg flex items-center justify-center h-32"><span class="text-xl font-bold text-gray-700">Toast POS</span></div>
+                        <div class="p-6 bg-gray-100 rounded-lg flex items-center justify-center h-32"><span class="text-xl font-bold text-gray-700">Square</span></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Pagina Contact -->
+        <div id="page-contact" class="page-content">
+             <section class="py-20 bg-gray-50">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-3xl mx-auto mb-12"><h2 class="text-4xl font-bold text-[#1E1B30] mb-4">Contactează-ne</h2><p class="text-lg text-gray-600">Ai o întrebare sau vrei să discuți despre un plan personalizat? Suntem aici pentru tine.</p></div>
+                    <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                        <form><div class="mb-4"><label class="block text-gray-700 font-bold mb-2" for="name">Nume</label><input class="w-full px-3 py-2 border rounded-lg" type="text" id="name" placeholder="Numele tău"></div><div class="mb-4"><label class="block text-gray-700 font-bold mb-2" for="email">Email</label><input class="w-full px-3 py-2 border rounded-lg" type="email" id="email" placeholder="adresa@email.com"></div><div class="mb-6"><label class="block text-gray-700 font-bold mb-2" for="message">Mesaj</label><textarea class="w-full px-3 py-2 border rounded-lg" id="message" rows="5" placeholder="Mesajul tău..."></textarea></div><div class="text-center"><button class="bg-[#F25C54] text-white font-bold py-3 px-8 rounded-lg hover:bg-[#C15866] btn-primary" type="button">Trimite Mesajul</button></div></form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-[#1E1B30] text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-4 gap-8 text-center md:text-left">
+                <div><h4 class="font-bold text-lg mb-4">Cardzify</h4><p class="text-gray-400">Transformăm vizitatorii în clienți fideli.</p></div>
+                <div><h4 class="font-bold text-lg mb-4">Navigare</h4><ul class="space-y-2"><li class="text-gray-300"><a href="#" data-page="home" class="nav-link">Acasă</a></li><li class="text-gray-300"><a href="#" data-page="functionalitati" class="nav-link">Funcționalități</a></li><li class="text-gray-300"><a href="#" data-page="preturi" class="nav-link">Prețuri</a></li></ul></div>
+                <div><h4 class="font-bold text-lg mb-4">Resurse</h4><ul class="space-y-2"><li class="text-gray-300"><a href="#">Blog</a></li><li class="text-gray-300"><a href="#">Despre Noi</a></li><li class="text-gray-300"><a href="#" data-page="contact" class="nav-link">Contact</a></li></ul></div>
+                <div><h4 class="font-bold text-lg mb-4">Legal</h4><ul class="space-y-2"><li class="text-gray-300"><a href="#">Termeni și Condiții</a></li><li class="text-gray-300"><a href="#">Politica de Confidențialitate</a></li></ul></div>
+            </div>
+            <div class="text-center text-gray-500 mt-12 border-t border-gray-700 pt-8">
+                <p>&copy; 2024 Cardzify. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const pages = document.querySelectorAll('.page-content');
+            const navLinks = document.querySelectorAll('.nav-link, .nav-logo, a[data-page]');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            const cardLibrary = {
+                cafenele: { name: 'The Coffee Bean', logo: '☕', color: '#B49272', types: { stamps: { name: 'Card cu Ștampile', reward: 'A 10-a cafea gratuită', visual: () => `<div class="grid grid-cols-5 gap-2 w-full max-w-[200px]">${Array.from({length: 10}, (_, i) => `<span class="w-8 h-8 rounded-full flex items-center justify-center text-xl ${i < 7 ? 'bg-white/30' : 'bg-white/10'}">${i < 7 ? '✔️' : ''}</span>`).join('')}</div>` }}, coupon: { name: 'Cupon de Bun Venit', reward: '50% Reducere la un Croissant', visual: () => `<div class="text-6xl">🏷️</div>` }}},
+                saloane: { name: 'Glamour Studio', logo: '💅', color: '#D8A0A6', types: { discount: { name: 'Card de Discount', reward: '15% Reducere permanentă', visual: () => `<div class="text-center"><p class="text-6xl font-bold">15%</p><p class="font-semibold">OFF</p></div>` }, giftcard: { name: 'Gift Card', reward: 'Valoare încărcată: 250 RON', visual: () => `<div class="text-center"><p class="text-sm">Valoare</p><p class="text-5xl font-bold">250</p><p class="font-semibold">RON</p></div>` }}},
+                restaurante: { name: 'Pizza Palace', logo: '🍕', color: '#E68673', types: { cashback: { name: 'Card Cashback', reward: '5% înapoi la fiecare notă', visual: () => `<div class="text-center"><p class="text-6xl font-bold">5%</p><p class="font-semibold">CASHBACK</p></div>` }, multipass: { name: 'Meniu de Prânz', reward: '5 Meniuri pre-plătite', visual: () => `<div class="text-center"><p class="text-sm">Meniuri rămase</p><p class="text-6xl font-bold">3</p></div>` }}}
+            };
+            
+            const cardDisplay = document.getElementById('card-display');
+            const cardBusinessName = document.getElementById('card-business-name');
+            const cardTypeName = document.getElementById('card-type-name');
+            const cardLogo = document.getElementById('card-logo');
+            const cardReward = document.getElementById('card-reward');
+            const cardVisualDetails = document.getElementById('card-visual-details');
+            const cardTypeSelector = document.getElementById('card-type-selector');
+            const businessButtons = document.querySelectorAll('.business-btn');
+            
+            let currentBusiness = 'cafenele';
+
+            function updateCardVisual(businessKey, typeKey) {
+                const business = cardLibrary[businessKey];
+                const cardType = business.types[typeKey];
+
+                cardDisplay.style.backgroundColor = business.color;
+                cardBusinessName.textContent = business.name;
+                cardLogo.textContent = business.logo;
+                cardTypeName.textContent = cardType.name;
+                cardReward.textContent = cardType.reward;
+                cardVisualDetails.innerHTML = cardType.visual();
+                
+                const typeButtons = cardTypeSelector.querySelectorAll('.card-type-btn');
+                typeButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.type === typeKey);
+                });
+            }
+
+            function selectBusinessType(businessKey) {
+                currentBusiness = businessKey;
+                
+                businessButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.business === businessKey);
+                });
+
+                const business = cardLibrary[businessKey];
+                const typeKeys = Object.keys(business.types);
+                
+                cardTypeSelector.innerHTML = '';
+                typeKeys.forEach(key => {
+                    const button = document.createElement('button');
+                    button.className = 'card-type-btn px-3 py-1.5 text-sm font-semibold rounded-full bg-gray-200 text-gray-700 transition';
+                    button.textContent = business.types[key].name;
+                    button.dataset.type = key;
+                    button.onclick = () => updateCardVisual(businessKey, key);
+                    cardTypeSelector.appendChild(button);
+                });
+                
+                updateCardVisual(businessKey, typeKeys[0]);
+            }
+
+            businessButtons.forEach(btn => {
+                btn.addEventListener('click', () => selectBusinessType(btn.dataset.business));
+            });
+            selectBusinessType('cafenele');
+
+            function showPage(pageId) {
+                if (!pageId) pageId = 'home';
+                pages.forEach(page => page.classList.remove('active'));
+                const activePage = document.getElementById(`page-${pageId}`);
+                if (activePage) activePage.classList.add('active');
+                else document.getElementById('page-home').classList.add('active');
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.page === pageId) link.classList.add('active');
+                });
+                window.scrollTo(0, 0);
+                mobileMenu.classList.add('hidden');
+            }
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage(link.dataset.page);
+                });
+            });
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            showPage('home');
+            
+            const solutionsData = {
+                cafenele: { title: '☕ Pentru Cafenele', content: 'Fidelizează clienții care iubesc cafeaua. Oferă o băutură gratuită, notifică-i despre sortimente noi și transformă vizita de dimineață într-un obicei zilnic.', image: 'https://placehold.co/500x350/B49272/FFFFFF?text=Soluție+Cafenea', strategies: [ { title: 'Carduri cu Ștampile', description: 'După un număr stabilit de cafele cumpărate, oferă una gratuită pentru a încuraja vizitele repetate (ex: a 9-a cafea este din partea casei).' }, { title: 'Carduri Cupon', description: 'Emite cupoane digitale pentru produse specifice (ex: un produs de patiserie nou) sau pentru a atrage clienți în orele mai puțin aglomerate.' }, { title: 'Carduri de Recompense', description: 'Implementează un sistem de puncte unde clienții acumulează puncte pentru fiecare achiziție, pe care le pot folosi pentru produse gratuite sau experiențe exclusive (ex: degustare de cafea).' }, { title: 'Carduri de Discount', description: 'Oferă un discount direct la fiecare achiziție, care poate fi mai mare pentru clienții VIP sau cei care vin frecvent.' } ]},
+                saloane: { title: '💅 Pentru Saloane de Înfrumusețare', content: 'Răsplătește loialitatea clientelor tale cu discounturi la servicii viitoare sau produse gratuite. Trimite-le mementouri pentru programări și oferte personalizate de ziua lor pentru a le face să se simtă speciale.', image: 'https://placehold.co/500x350/D8A0A6/FFFFFF?text=Soluție+Salon', strategies: [ { title: 'Carduri cu Ștampile pentru Servicii Regulate', description: 'Implementează carduri cu ștampile digitale pentru servicii frecvente precum manichiură sau tuns. Oferă un serviciu gratuit după un număr de vizite pentru a încuraja afacerile repetate.' }, { title: 'Carduri Cashback pentru Servicii de Valoare Mare', description: 'Folosește carduri cashback digitale pentru tratamente mai scumpe, cum ar fi colorarea părului, oferind un procent înapoi pentru fiecare leu cheltuit ca credit pentru servicii viitoare.' }, { title: 'Carduri de Membru pentru Clienți VIP', description: 'Oferă carduri de membru care oferă beneficii exclusive, cum ar fi programare prioritară, reduceri la produse și acces la evenimente sau servicii doar pentru VIP-uri.' }, { title: 'Carduri de Discount pentru Orele Libere', description: 'Încurajează vizitele în perioadele mai lente, oferind carduri de reducere digitale valabile pentru anumite ore sau zile.' }, { title: 'Carduri Cupon pentru Promoții Sezoniere', description: 'Utilizează carduri cupon digitale pentru promoții sezoniere sau pentru a introduce noi servicii și produse, atrăgând clienții să încerce ceva nou la un preț redus.' }, { title: 'Carduri de Recompense pentru Recomandări', description: 'Recompensează clienții pentru recomandări și pentru partajarea experiențelor lor pe rețelele sociale cu reduceri speciale sau servicii.' } ] },
+                restaurante: { title: '🍕 Pentru Restaurante', content: 'Încurajează vizitele repetate oferind aperitive, deserturi sau un pahar de vin din partea casei. Segmentează clienții în funcție de preferințele lor culinare și trimite-le oferte care îi vor face să poftească la meniul tău.', image: 'https://placehold.co/500x350/E68673/FFFFFF?text=Soluție+Restaurant', strategies: [ { title: 'Carduri cu Ștampile', description: 'Perfect pentru a încuraja vizitele repetate. După un număr de mese, oferă un aperitiv gratuit sau o reducere. Exemplu: "Cumperi 9 prânzuri, al 10-lea e gratuit".' }, { title: 'Carduri de Membru', description: 'Oferă un abonament anual care include beneficii exclusive, cum ar fi rezervări prioritare, o sticlă de vin la ocazii speciale sau o reducere fixă la fiecare vizită.' }, { title: 'Carduri Cupon', description: 'Emite cupoane digitale pentru anumite preparate sau reduceri speciale în zilele mai puțin aglomerate pentru a atrage clienți.' }, { title: 'Carduri de Recompense', description: 'Implementează un sistem de puncte în care diferite acțiuni (ex: cina în restaurant, recomandarea unui prieten) aduc puncte ce pot fi folosite pentru mese gratuite sau cursuri de gătit exclusive.' }, { title: 'Carduri Cadou (Gift Cards)', description: 'Încurajează oaspeții să prezinte restaurantul prietenilor și familiei, oferind carduri cadou digitale.' } ] },
+                 hoteluri: { 
+                    title: '🏨 Pentru Hoteluri/Pensiuni', 
+                    content: 'Crește numărul de rezervări directe și încurajează oaspeții să revină. Oferă nopți gratuite, upgrade-uri de cameră sau acces exclusiv la facilități prin diverse tipuri de carduri de loialitate.', 
+                    image: 'https://placehold.co/500x350/5A8F7B/FFFFFF?text=Soluție+Hotel',
+                    strategies: [
+                        { title: 'Carduri cu Ștampile', description: 'Recompensează oaspeții cu o ședere gratuită sau un upgrade după un număr stabilit de nopți de cazare.' },
+                        { title: 'Carduri Cashback', description: 'Oferă un procent din costul rezervării înapoi pe cardul digital, stimulând rezervările viitoare.' },
+                        { title: 'Carduri de Membru', description: 'Creează niveluri de membru cu recompense progresive, cum ar fi upgrade-uri de cameră sau check-out târziu.' },
+                        { title: 'Carduri de Discount', description: 'Oferă reduceri sezoniere sau tarife speciale pentru membri, încurajând rezervările în perioadele mai puțin aglomerate.' },
+                        { title: 'Carduri Cupon', description: 'Distribuie oferte speciale pentru mese, servicii spa sau activități, îmbunătățind experiența oaspeților.' },
+                        { title: 'Carduri de Recompense', description: 'Implementează un sistem de puncte unde oaspeții câștigă puncte pentru fiecare ședere, pe care le pot folosi pentru nopți gratuite sau alte servicii.' },
+                    ]
+                },
+                 servicii: { 
+                    title: '🔧 Pentru Servicii Profesionale', 
+                    content: 'Încurajează programările regulate și construiește o bază de clienți recurenți pentru afacerea ta, fie că este vorba de curățenie, reparații auto, sau întreținere.', 
+                    image: 'https://placehold.co/500x350/4B5563/FFFFFF?text=Soluție+Servicii',
+                    strategies: [
+                        { title: 'Carduri cu Ștampile', description: 'Oferă o consultație sau un serviciu gratuit după un număr stabilit de servicii plătite (ex: a 5-a spălare auto gratuită).' },
+                        { title: 'Carduri de Membru', description: 'Creează programe de membru pentru servicii premium, oferind prioritate la programări sau acces exclusiv.' },
+                        { title: 'Carduri de Recompense (Referral)', description: 'Implementează un program de recomandare unde clienții existenți câștigă recompense pentru aducerea de noi clienți.' },
+                        { title: 'Carduri Cupon', description: 'Folosește oferte limitate în timp pentru a stimula interesul pentru servicii specifice sau pentru a atrage clienți noi.' },
+                        { title: 'Carduri Cashback', description: 'Oferă cashback pentru servicii, care poate fi folosit la programările viitoare, încurajând continuitatea.' },
+                        { title: 'Carduri Multi-pass', description: 'Oferă un discount la achiziționarea în avans a unui pachet de mai multe sesiuni sau servicii.' },
+                    ]
+                },
+                tatuaje: {
+                    title: '🎨 Pentru Studiouri de Tatuaje',
+                    content: 'Încurajează clienții să revină pentru sesiuni viitoare și să recomande studioul prietenilor. Cardzify te ajută să construiești o comunitate în jurul artei tale.',
+                    image: 'https://placehold.co/500x350/1E1B30/FFFFFF?text=Soluție+Tattoo',
+                    strategies: [
+                        { title: 'Carduri Cupon', description: 'Utilizează cupoane digitale pentru promoții sezoniere (Flash Days) sau pentru a introduce și promova un nou artist în studio.' },
+                        { title: 'Carduri Cadou (Gift Cards)', description: 'Vinde carduri cadou digitale pentru servicii sau o valoare specifică, facilitând atragerea de noi clienți prin recomandări.' },
+                        { title: 'Carduri de Recompense (Referrals)', description: 'Recompensează clienții pentru recomandări și pentru partajarea experiențelor lor pe rețelele sociale cu reduceri speciale.' },
+                        { title: 'Carduri de Discount', description: 'Oferă reduceri pentru programări în perioade mai puțin aglomerate sau în anumite zile ale săptămânii pentru a încuraja un flux constant de clienți.'}
+                    ]
+                },
+                vape: {
+                    title: '💨 Pentru Vape Shops',
+                    content: 'Construiește o comunitate de clienți fideli și încurajează achizițiile repetate de lichide, arome și dispozitive. Cardzify este instrumentul perfect pentru a crește vânzările într-o piață competitivă.',
+                    image: 'https://placehold.co/500x350/38BDF8/FFFFFF?text=Soluție+Vape',
+                    strategies: [
+                        { title: 'Carduri cu Ștampile', description: 'Recompensează achizițiile frecvente. De exemplu, un lichid sau o rezistență gratuită după 10 produse cumpărate.' },
+                        { title: 'Carduri de Membru', description: 'Oferă membrilor acces la lichide ediție limitată, discounturi exclusive sau noutăți în avanpremieră.' },
+                        { title: 'Carduri Cupon', description: 'Lansează oferte pentru anumite arome sau pachete (lichid + rezistență) direct în portofelul digital al clienților.' },
+                        { title: 'Carduri de Recompense', description: 'Implementează un sistem de puncte unde clienții acumulează puncte la fiecare achiziție, pe care le pot folosi pentru reduceri.' },
+                        { title: 'Carduri Multi-pass', description: 'Creează pachete avantajoase, cum ar fi un "Pachet de Începător" (dispozitiv + 3 lichide) la un preț special.' },
+                        { title: 'Carduri Cadou (Gift Cards)', description: 'Permite clienților să ofere cadou un card cu o valoare pre-plătită, atrăgând astfel noi pasionați în magazin.' }
+                    ]
+                }
+            };
+            function buildSolutionsPage() {
+                const container = document.getElementById('solutions-container');
+                if (!container) return;
+                let tabsHTML = '<div class="flex flex-wrap justify-center space-x-2 sm:space-x-4 mb-8 border-b">';
+                let contentHTML = '';
+                Object.keys(solutionsData).forEach((key, index) => {
+                    const isActive = index === 0;
+                    const business = solutionsData[key];
+                    tabsHTML += `<button class="solution-tab py-4 px-2 text-base sm:text-lg font-semibold ${isActive ? 'text-[#F25C54] border-b-2 border-[#F25C54]' : 'text-gray-500'}" data-solution="${key}">${business.title}</button>`;
+                    
+                    let strategiesHTML = '';
+                    if (business.strategies) {
+                        strategiesHTML += '<div class="mt-8 pt-8 border-t"><h4 class="text-2xl font-bold mb-4 text-center">💡 Idei de Strategii de Loialitate</h4><ul class="space-y-4">';
+                        business.strategies.forEach(strategy => {
+                            strategiesHTML += `<li class="flex items-start"><span class="text-[#F25C54] mr-3 mt-1">✔</span><div><h5 class="font-semibold">${strategy.title}</h5><p class="text-gray-600 text-sm">${strategy.description}</p></div></li>`;
+                        });
+                        strategiesHTML += '</ul></div>';
+                    }
+
+                    contentHTML += `
+                        <div class="solution-content ${isActive ? '' : 'hidden'}" id="solution-${key}">
+                            <div class="bg-white p-8 md:p-12 rounded-lg shadow-xl">
+                                <div class="grid md:grid-cols-2 gap-12 items-center">
+                                    <div><h3 class="text-3xl font-bold mb-4">${business.title}</h3><p class="text-gray-600 leading-relaxed">${business.content}</p></div>
+                                    <div><img src="${business.image}" class="rounded-lg shadow-lg" alt="Imagine pentru ${business.title}"></div>
+                                </div>
+                                ${strategiesHTML}
+                            </div>
+                        </div>`;
+                });
+                tabsHTML += '</div>';
+                container.innerHTML = tabsHTML + contentHTML;
+                 document.querySelectorAll('.solution-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        const solutionKey = tab.dataset.solution;
+                        document.querySelectorAll('.solution-tab').forEach(t => t.classList.remove('text-[#F25C54]', 'border-b-2', 'border-[#F25C54]'));
+                        tab.classList.add('text-[#F25C54]', 'border-b-2', 'border-[#F25C54]');
+                        document.querySelectorAll('.solution-content').forEach(c => c.classList.add('hidden'));
+                        document.getElementById(`solution-${solutionKey}`).classList.remove('hidden');
+                    });
+                });
+            }
+            buildSolutionsPage();
+
+        });
+    </script>
+</body>
+</html>
+
