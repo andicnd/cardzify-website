@@ -6,6 +6,13 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 
 ## Recent Changes
 
+**Footer Component (October 2025)**
+- Added professional footer with 4-column layout matching brand design
+- Included sections: Cardzify brand (logo + tagline), Navigare (all site pages), Contact
+- Footer appears on all pages with sticky bottom positioning
+- All footer links use wouter for instant SPA navigation
+- Design: Purple background (#2C2645), coral hover effects (#F25C54)
+
 **Performance Optimization & SEO (October 2025)**
 - Optimized navigation speed with dual strategy: SPA performance + SEO benefits
 - Reintroduced wouter for instant client-side routing (no page reloads)
