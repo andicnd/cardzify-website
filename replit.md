@@ -6,6 +6,13 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 
 ## Recent Changes
 
+**Performance Optimization & SEO (October 2025)**
+- Optimized navigation speed with dual strategy: SPA performance + SEO benefits
+- Reintroduced wouter for instant client-side routing (no page reloads)
+- Maintained server-side meta tag injection for SEO when accessing URLs directly
+- Added client-side meta tag updates via useEffect when navigating in app
+- Result: Instant navigation between pages while preserving perfect SEO
+
 **Multi-page Website & SEO Optimization (October 2025)**
 - Transformed from SPA to multi-page website with proper SEO
 - Implemented server-side meta tag injection for production (unique title, description, Open Graph tags per page)
@@ -30,11 +37,11 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 
 ### Frontend
 - **Framework**: React with TypeScript
-- **Routing**: Multi-page navigation with standard HTML links (no client-side routing)
+- **Routing**: Wouter for instant SPA navigation
 - **Styling**: Tailwind CSS with Shadcn UI components
 - **Forms**: React Hook Form with Zod validation
 - **State Management**: TanStack Query for data fetching
-- **SEO**: Server-side meta tag injection in production, client-side fallback in development
+- **SEO**: Dual strategy - server-side meta tags for direct access (SEO), client-side updates for in-app navigation (performance)
 
 ### Backend
 - **Server**: Express.js
