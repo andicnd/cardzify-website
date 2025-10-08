@@ -6,6 +6,12 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 
 ## Recent Changes
 
+**Solutions Page Expansion (October 2025)**
+- Added 3 new business types to Solutions page: Hoteluri/Pensiuni, Studiouri de Tatuaje, Vape Shops
+- Each new category has custom icon (Hotel, Paintbrush, Cloud) and 4 tailored benefits
+- Total 9 industries now supported with tab navigation
+- Maintained consistent design and functionality across all categories
+
 **Footer Component (October 2025)**
 - Added professional footer with 4-column layout matching brand design
 - Included sections: Cardzify brand (logo + tagline), Navigare (all site pages), Contact
@@ -67,7 +73,7 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 - **Home** (`/`): Hero section, interactive card preview, benefits, testimonials
 - **Pricing** (`/preturi`): 3-tier pricing (Start free, Pro 129 RON, Enterprise custom)
 - **Features** (`/functionalitati`): Feature showcase and 8 card types
-- **Solutions** (`/solutii`): Industry-specific solutions with tab navigation
+- **Solutions** (`/solutii`): Industry-specific solutions with tab navigation (9 industries: Cafenele, Saloane, Restaurante, Retail, Fitness, Servicii, Hoteluri/Pensiuni, Studiouri de Tatuaje, Vape Shops)
 - **Integrations** (`/integrari`): Integration partners display
 - **Contact** (`/contact`): Contact form and company information
 
