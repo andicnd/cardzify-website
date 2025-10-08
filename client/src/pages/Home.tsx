@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Coffee, Scissors, Pizza, TrendingUp, BarChart, MessageCircle, Check } from "lucide-react";
@@ -125,15 +124,15 @@ export default function Home() {
             digital, eficient.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <Link href="/preturi">
+            <a href="/preturi">
               <Button
                 className="bg-cardzify-coral text-white hover:bg-cardzify-coral/90 transition-all hover:-translate-y-0.5 shadow-lg px-8 py-6 text-lg w-full sm:w-auto"
                 data-testid="button-vezi-preturi"
               >
                 Vezi prețurile
               </Button>
-            </Link>
-            <Link href="/functionalitati">
+            </a>
+            <a href="/functionalitati">
               <Button
                 variant="outline"
                 className="bg-white text-cardzify-purple border-gray-300 hover:bg-gray-50 px-8 py-6 text-lg w-full sm:w-auto"
@@ -141,7 +140,7 @@ export default function Home() {
               >
                 Descoperă funcționalități
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -235,14 +234,13 @@ export default function Home() {
                 </button>
               ))}
               <div className="text-center pt-2">
-                <Link href="/functionalitati">
-                  <a
-                    className="text-sm text-gray-600 hover:text-cardzify-coral transition"
-                    data-testid="link-all-card-types"
-                  >
-                    ...și multe altele! Descoperă toate cele 8 tipologii de carduri.
-                  </a>
-                </Link>
+                <a
+                  href="/functionalitati"
+                  className="text-sm text-gray-600 hover:text-cardzify-coral transition"
+                  data-testid="link-all-card-types"
+                >
+                  ...și multe altele! Descoperă toate cele 8 tipologii de carduri.
+                </a>
               </div>
             </div>
           </div>

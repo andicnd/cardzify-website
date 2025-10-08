@@ -1,4 +1,3 @@
-import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
@@ -97,7 +96,7 @@ export default function Pricing() {
                 </ul>
 
                 {plan.isContact ? (
-                  <Link href="/contact">
+                  <a href="/contact">
                     <Button
                       variant={plan.ctaVariant}
                       className={`w-full ${
@@ -111,7 +110,7 @@ export default function Pricing() {
                     >
                       {plan.cta}
                     </Button>
-                  </Link>
+                  </a>
                 ) : (
                   <Button
                     variant={plan.ctaVariant}
