@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Coffee, Scissors, Pizza, TrendingUp, BarChart, MessageCircle, Check } from "lucide-react";
+import { Link } from "wouter";
 
 type CardType = "stamps" | "points" | "value" | "discount" | "membership" | "events" | "combo" | "vouchers";
 type BusinessType = "cafenele" | "saloane" | "restaurante";
@@ -124,15 +125,15 @@ export default function Home() {
             digital, eficient.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <a href="/preturi">
+            <Link href="/preturi">
               <Button
                 className="bg-cardzify-coral text-white hover:bg-cardzify-coral/90 transition-all hover:-translate-y-0.5 shadow-lg px-8 py-6 text-lg w-full sm:w-auto"
                 data-testid="button-vezi-preturi"
               >
                 Vezi prețurile
               </Button>
-            </a>
-            <a href="/functionalitati">
+            </Link>
+            <Link href="/functionalitati">
               <Button
                 variant="outline"
                 className="bg-white text-cardzify-purple border-gray-300 hover:bg-gray-50 px-8 py-6 text-lg w-full sm:w-auto"
@@ -140,7 +141,7 @@ export default function Home() {
               >
                 Descoperă funcționalități
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -438,14 +439,14 @@ export default function Home() {
             Începe să construiești un program de loialitate pe care clienții tăi îl vor
             iubi. Alege planul potrivit pentru tine.
           </p>
-          <a href="/preturi">
+          <Link href="/preturi">
             <Button
               className="bg-cardzify-coral text-white hover:bg-cardzify-coral/90 transition-all hover:-translate-y-0.5 shadow-lg px-8 py-6 text-lg"
               data-testid="button-vezi-planuri"
             >
               Vezi planurile și prețurile
             </Button>
-          </a>
+          </Link>
         </div>
       </section>
     </div>
