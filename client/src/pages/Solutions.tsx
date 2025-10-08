@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Coffee, Scissors, Pizza, ShoppingBag, Dumbbell, Wrench } from "lucide-react";
+import { Coffee, Scissors, Pizza, ShoppingBag, Dumbbell, Wrench, Hotel, Paintbrush, Cloud } from "lucide-react";
 
-type Industry = "cafenele" | "saloane" | "restaurante" | "retail" | "fitness" | "servicii";
+type Industry = "cafenele" | "saloane" | "restaurante" | "retail" | "fitness" | "servicii" | "hoteluri" | "tatuaje" | "vape";
 
 const solutionsData: Record<Industry, {
   title: string;
@@ -76,6 +76,39 @@ const solutionsData: Record<Industry, {
       "CRM complet pentru gestionarea clienților",
     ],
     icon: <Wrench className="w-16 h-16 text-cardzify-coral" />,
+  },
+  hoteluri: {
+    title: "Soluții pentru Hoteluri & Pensiuni",
+    description: "Crește loialitatea oaspeților și rezervările directe cu un program de recompense personalizat.",
+    benefits: [
+      "Card de fidelitate pentru cazări recurente",
+      "Discount progresiv pentru sejururi multiple",
+      "Upgrade gratuit la cameră pentru clienți fideli",
+      "Oferte exclusive pentru evenimente și sărbători",
+    ],
+    icon: <Hotel className="w-16 h-16 text-cardzify-coral" />,
+  },
+  tatuaje: {
+    title: "Soluții pentru Studiouri de Tatuaje",
+    description: "Construiește o comunitate de clienți fideli și încurajează recomandările.",
+    benefits: [
+      "Card cu discount pentru sesiuni viitoare",
+      "Puncte pentru postare pe social media",
+      "Prioritate la programări pentru clienți fideli",
+      "Recompense pentru recomandări",
+    ],
+    icon: <Paintbrush className="w-16 h-16 text-cardzify-coral" />,
+  },
+  vape: {
+    title: "Soluții pentru Vape Shops",
+    description: "Fidelizează clienții și crește vânzările cu un sistem de recompense atractiv.",
+    benefits: [
+      "Card cu puncte pentru fiecare achiziție",
+      "Oferte exclusive pentru produse noi",
+      "Discount la accesorii pentru clienți fideli",
+      "Program de cashback pentru comenzi mari",
+    ],
+    icon: <Cloud className="w-16 h-16 text-cardzify-coral" />,
   },
 };
 
