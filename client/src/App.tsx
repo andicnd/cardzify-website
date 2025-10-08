@@ -3,6 +3,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Header } from "@/components/Header";
+import { Switch, Route } from "wouter";
 import Home from "@/pages/Home";
 import Pricing from "@/pages/Pricing";
 import Features from "@/pages/Features";
@@ -10,39 +11,21 @@ import Solutions from "@/pages/Solutions";
 import Integrations from "@/pages/Integrations";
 import Contact from "@/pages/Contact";
 
-function App({ page }: { page: string }) {
-  let PageComponent;
-  
-  switch (page) {
-    case 'home':
-      PageComponent = Home;
-      break;
-    case 'preturi':
-      PageComponent = Pricing;
-      break;
-    case 'functionalitati':
-      PageComponent = Features;
-      break;
-    case 'solutii':
-      PageComponent = Solutions;
-      break;
-    case 'integrari':
-      PageComponent = Integrations;
-      break;
-    case 'contact':
-      PageComponent = Contact;
-      break;
-    default:
-      PageComponent = Home;
-  }
-
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <div className="min-h-screen bg-background">
-          <Header currentPage={page} />
+          <Header />
           <main className="pt-20">
-            <PageComponent />
+            <Switch>
+              <Route path="/" component={Home} />
+              <Route path="/preturi" component={Pricing} />
+              <Route path="/functionalitati" component={Features} />
+              <Route path="/solutii" component={Solutions} />
+              <Route path="/integrari" component={Integrations} />
+              <Route path="/contact" component={Contact} />
+            </Switch>
           </main>
         </div>
         <Toaster />
