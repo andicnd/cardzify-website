@@ -438,14 +438,14 @@ export default function Home() {
             Începe să construiești un program de loialitate pe care clienții tăi îl vor
             iubi. Alege planul potrivit pentru tine.
           </p>
-          <Link href="/preturi">
+          <a href="/preturi">
             <Button
               className="bg-cardzify-coral text-white hover:bg-cardzify-coral/90 transition-all hover:-translate-y-0.5 shadow-lg px-8 py-6 text-lg"
               data-testid="button-vezi-planuri"
             >
               Vezi planurile și prețurile
             </Button>
-          </Link>
+          </a>
         </div>
       </section>
     </div>

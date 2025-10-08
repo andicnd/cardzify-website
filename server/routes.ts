@@ -34,33 +34,34 @@ const pageMetadata: Record<string, { title: string; description: string }> = {
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // SEO-optimized page serving for production
   const servePageWithMeta = async (req: any, res: any, next: any) => {
-    if (app.get("env") !== "development") {
+    // In development, let Vite handle everything (client-side meta tags will work)
+    if (app.get("env") === "development") {
       return next();
     }
 
+    // In production, serve HTML with proper meta tags for SEO
     const url = req.path;
     const metadata = pageMetadata[url] || pageMetadata['/'];
 
     try {
-      const clientTemplate = path.resolve(
-        import.meta.dirname,
-        "..",
-        "client",
-        "index.html",
-      );
+      const distPath = path.resolve(import.meta.dirname, "public");
+      const indexPath = path.resolve(distPath, "index.html");
 
-      let template = await fs.promises.readFile(clientTemplate, "utf-8");
+      let html = await fs.promises.readFile(indexPath, "utf-8");
       
-      template = template.replace(
+      // Replace title and description
+      html = html.replace(
         /<title>.*?<\/title>/,
         `<title>${metadata.title}</title>`
       );
-      template = template.replace(
+      html = html.replace(
         /<meta name="description" content=".*?" \/>/,
         `<meta name="description" content="${metadata.description}" />`
       );
       
+      // Add Open Graph and Twitter tags
       const ogTags = `
     <meta property="og:title" content="${metadata.title}" />
     <meta property="og:description" content="${metadata.description}" />
@@ -70,9 +71,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     <meta name="twitter:title" content="${metadata.title}" />
     <meta name="twitter:description" content="${metadata.description}" />`;
       
-      template = template.replace('</head>', `${ogTags}\n  </head>`);
+      html = html.replace('</head>', `${ogTags}\n  </head>`);
       
-      res.status(200).set({ "Content-Type": "text/html" }).send(template);
+      res.status(200).set({ "Content-Type": "text/html" }).send(html);
     } catch (error) {
       next();
     }
@@ -118,7 +119,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // SEO routes for each page
+  // Register SEO routes for each page (production only)
   app.get('/', servePageWithMeta);
   app.get('/functionalitati', servePageWithMeta);
   app.get('/solutii', servePageWithMeta);
