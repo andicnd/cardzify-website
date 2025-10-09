@@ -230,8 +230,17 @@ export default function Home() {
 
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-start">
             <div className="mb-12 lg:mb-0">
-              <div className="relative bg-gray-200/50 rounded-3xl p-8 max-w-sm mx-auto">
-                <LoyaltyCard business={selectedBusiness} cardType={selectedCardType} />
+              <div className="relative max-w-sm mx-auto">
+                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-[3rem] p-3 shadow-2xl">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-gray-900 rounded-b-3xl"></div>
+                  <div className="bg-white rounded-[2.5rem] overflow-hidden" style={{ aspectRatio: '9/19.5' }}>
+                    <div className="h-full bg-gradient-to-br from-gray-100 to-gray-200 p-6 flex items-center justify-center">
+                      <div className="w-full">
+                        <LoyaltyCard business={selectedBusiness} cardType={selectedCardType} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -310,7 +319,7 @@ export default function Home() {
                     onClick={() => handleBusinessChange(business)}
                     className={`text-left p-4 border-2 rounded-lg hover:bg-gray-50 transition duration-300 hover-elevate ${
                       selectedBusiness === business
-                        ? "border-cardzify-coral bg-red-50"
+                        ? "border-cardzify-coral bg-cardzify-coral/10"
                         : "border-gray-200"
                     }`}
                     data-testid={`button-business-${business}`}
