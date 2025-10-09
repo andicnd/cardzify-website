@@ -69,7 +69,7 @@ export default function Features() {
     },
     {
       name: "Card Cashback",
-      description: "Returnează un procent din valoarea achizițiilor direct în contul clientului.",
+      description: "Returnează un procent din valoarea achizițiilor, sub formă de puncte, direct pe cardul clientului.",
       icon: <Wallet className="w-10 h-10 text-cardzify-coral" />,
     },
     {
@@ -84,7 +84,7 @@ export default function Features() {
     },
     {
       name: "Card Coupon",
-      description: "Cupoane care pot fi folosite o singură dată pentru a atrage clienți noi.",
+      description: "Cupoane digitale care pot fi folosite o singură dată pentru a atrage clienți noi.",
       icon: <Ticket className="w-10 h-10 text-cardzify-coral" />,
     },
     {

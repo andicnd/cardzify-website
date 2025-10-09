@@ -1,44 +1,95 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Coffee, Scissors, Pizza, TrendingUp, BarChart, MessageCircle, Check } from "lucide-react";
+import { Coffee, Scissors, Pizza, ShoppingBag, Dumbbell, Wrench, Hotel, Paintbrush, Cloud, TrendingUp, BarChart, MessageCircle, Check, Wallet, Star, Percent } from "lucide-react";
 import { Link } from "wouter";
 
-type CardType = "stamps" | "points" | "value" | "discount" | "membership" | "events" | "combo" | "vouchers";
-type BusinessType = "cafenele" | "saloane" | "restaurante";
+type CardType = "stamps" | "rewards" | "cashback" | "discount" | "membership" | "coupon" | "multipass" | "giftcard";
+type BusinessType = "cafenele" | "saloane" | "restaurante" | "retail" | "fitness" | "servicii" | "hoteluri" | "tatuaje" | "vape";
 
-const cardTypes: Record<CardType, { name: string; visual: string }> = {
-  stamps: { name: "Card cu Ștampile", visual: "grid grid-cols-5 gap-2" },
-  points: { name: "Card cu Puncte", visual: "flex items-center justify-center" },
-  value: { name: "Card cu Valoare", visual: "flex items-center justify-center" },
-  discount: { name: "Card cu Discount", visual: "flex items-center justify-center" },
-  membership: { name: "Card de Membru", visual: "flex items-center justify-center" },
-  events: { name: "Card pentru Evenimente", visual: "flex items-center justify-center" },
-  combo: { name: "Card Combo", visual: "flex items-center justify-center" },
-  vouchers: { name: "Card cu Vouchere", visual: "flex items-center justify-center" },
+const cardTypes: Record<CardType, { name: string; icon: React.ReactNode }> = {
+  stamps: { name: "Card cu Ștampile", icon: <Check className="w-8 h-8" /> },
+  rewards: { name: "Card de Recompense", icon: <Star className="w-8 h-8" /> },
+  cashback: { name: "Card Cashback", icon: <Wallet className="w-8 h-8" /> },
+  discount: { name: "Card Discount", icon: <Percent className="w-8 h-8" /> },
+  membership: { name: "Card de Membru", icon: <Check className="w-8 h-8" /> },
+  coupon: { name: "Card Coupon", icon: <Check className="w-8 h-8" /> },
+  multipass: { name: "Card Multipass", icon: <Check className="w-8 h-8" /> },
+  giftcard: { name: "Gift Card", icon: <Check className="w-8 h-8" /> },
 };
 
-const businessData: Record<BusinessType, { name: string; type: CardType; color: string; icon: React.ReactNode; reward: string }> = {
+const businessData: Record<BusinessType, { name: string; type: CardType; color: string; icon: React.ReactNode; reward: string; description: string }> = {
   cafenele: {
     name: "The Coffee Bean",
     type: "stamps",
     color: "#B49272",
-    icon: <Coffee className="w-10 h-10 text-cardzify-coral" />,
-    reward: "A 10-a cafea gratuită"
+    icon: <Coffee className="w-6 h-6" />,
+    reward: "A 10-a cafea gratuită",
+    description: "Perfect pentru a recompensa clienții fideli cu băuturi gratuite."
   },
   saloane: {
     name: "Glamour Studio",
     type: "discount",
     color: "#D8A0A6",
-    icon: <Scissors className="w-10 h-10 text-cardzify-coral" />,
-    reward: "20% discount la al 5-lea serviciu"
+    icon: <Scissors className="w-6 h-6" />,
+    reward: "20% discount la al 5-lea serviciu",
+    description: "Oferă discounturi sau servicii bonus pentru a crește retenția."
   },
   restaurante: {
     name: "Pizza Palace",
-    type: "points",
+    type: "rewards",
     color: "#E68673",
-    icon: <Pizza className="w-10 h-10 text-cardzify-coral" />,
-    reward: "Pizza gratuită la 100 puncte"
+    icon: <Pizza className="w-6 h-6" />,
+    reward: "Pizza gratuită la 100 puncte",
+    description: "Atrage clienți noi cu oferte speciale și recompensează-i pe cei loiali."
+  },
+  retail: {
+    name: "Fashion Store",
+    type: "rewards",
+    color: "#A78295",
+    icon: <ShoppingBag className="w-6 h-6" />,
+    reward: "Discount 15% la 500 puncte",
+    description: "Construiește loialitate pe termen lung cu puncte pentru fiecare achiziție."
+  },
+  fitness: {
+    name: "Power Gym",
+    type: "membership",
+    color: "#8BA888",
+    icon: <Dumbbell className="w-6 h-6" />,
+    reward: "Acces VIP la clase premium",
+    description: "Motivează membrii cu beneficii exclusive și recompense pentru obiective."
+  },
+  servicii: {
+    name: "Pro Services",
+    type: "discount",
+    color: "#9B8FB0",
+    icon: <Wrench className="w-6 h-6" />,
+    reward: "10% discount la servicii recurente",
+    description: "Păstrează clienții aproape cu discount-uri pentru contracte pe termen lung."
+  },
+  hoteluri: {
+    name: "Grand Hotel",
+    type: "rewards",
+    color: "#C9A66B",
+    icon: <Hotel className="w-6 h-6" />,
+    reward: "Noapte gratuită la 10 sejururi",
+    description: "Crește rezervările directe cu puncte pentru fiecare sejur."
+  },
+  tatuaje: {
+    name: "Ink Studio",
+    type: "coupon",
+    color: "#D47B84",
+    icon: <Paintbrush className="w-6 h-6" />,
+    reward: "Cupon 50 RON pentru prima sesiune",
+    description: "Atrage clienți noi cu cupoane pentru prima vizită."
+  },
+  vape: {
+    name: "Vape Shop",
+    type: "cashback",
+    color: "#7FA9C4",
+    icon: <Cloud className="w-6 h-6" />,
+    reward: "5% cashback la fiecare comandă",
+    description: "Fidelizează clienții cu bani înapoi la fiecare achiziție."
   },
 };
 
@@ -70,15 +121,21 @@ function LoyaltyCard({ business, cardType }: { business: BusinessType; cardType:
                   i < 3 ? "bg-white/20" : ""
                 }`}
               >
-                {i < 3 && <Check className="w-6 h-6 text-cardzify-coral" />}
+                {i < 3 && <Check className="w-6 h-6 text-white" />}
               </div>
             ))}
           </div>
         )}
-        {cardType === "points" && (
+        {cardType === "rewards" && (
           <div className="text-center">
             <p className="text-5xl font-bold">75</p>
             <p className="text-sm opacity-80 mt-1">puncte acumulate</p>
+          </div>
+        )}
+        {cardType === "cashback" && (
+          <div className="text-center">
+            <p className="text-5xl font-bold">5%</p>
+            <p className="text-sm opacity-80 mt-1">CASHBACK</p>
           </div>
         )}
         {cardType === "discount" && (
@@ -87,7 +144,19 @@ function LoyaltyCard({ business, cardType }: { business: BusinessType; cardType:
             <p className="text-sm opacity-80 mt-1">DISCOUNT</p>
           </div>
         )}
-        {["value", "membership", "events", "combo", "vouchers"].includes(cardType) && (
+        {cardType === "membership" && (
+          <div className="text-center">
+            <p className="text-3xl font-bold">VIP MEMBER</p>
+            <p className="text-sm opacity-80 mt-2">Acces Premium</p>
+          </div>
+        )}
+        {cardType === "coupon" && (
+          <div className="text-center">
+            <p className="text-4xl font-bold">50 RON</p>
+            <p className="text-sm opacity-80 mt-2">CUPON</p>
+          </div>
+        )}
+        {["multipass", "giftcard"].includes(cardType) && (
           <div className="text-center">
             <p className="text-2xl font-semibold">{typeInfo.name}</p>
           </div>
@@ -161,87 +230,117 @@ export default function Home() {
 
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-start">
             <div className="mb-12 lg:mb-0">
-              <LoyaltyCard business={selectedBusiness} cardType={selectedCardType} />
-
-              <div className="max-w-md mx-auto mt-4 flex flex-wrap justify-center gap-2">
-                {(Object.keys(cardTypes) as CardType[]).map((type) => (
-                  <Button
-                    key={type}
-                    variant={selectedCardType === type ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedCardType(type)}
-                    className={selectedCardType === type ? "bg-cardzify-purple text-white" : ""}
-                    data-testid={`button-card-type-${type}`}
-                  >
-                    {cardTypes[type].name}
-                  </Button>
-                ))}
-              </div>
-
-              <div className="max-w-md mx-auto mt-6 flex flex-col sm:flex-row gap-3">
-                <Button
-                  variant="outline"
-                  className="flex items-center justify-center bg-black text-white hover:bg-gray-800 border-0 w-full"
-                  data-testid="button-apple-wallet"
-                >
-                  <span className="text-2xl mr-2"></span> Adaugă în Apple Wallet
-                </Button>
-                <Button
-                  variant="outline"
-                  className="flex items-center justify-center bg-white border border-gray-300 text-gray-800 hover:bg-gray-100 w-full"
-                  data-testid="button-google-wallet"
-                >
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png"
-                    className="w-6 h-6 mr-2"
-                    alt="Google Logo"
-                  />
-                  Adaugă în Google Wallet
-                </Button>
+              <div className="relative bg-gray-200/50 rounded-3xl p-8 max-w-sm mx-auto">
+                <LoyaltyCard business={selectedBusiness} cardType={selectedCardType} />
               </div>
             </div>
 
             <div className="flex flex-col gap-6">
-              <p className="text-lg font-semibold text-gray-700" data-testid="text-business-selector-label">Alege un tip de afacere:</p>
-              {(Object.keys(businessData) as BusinessType[]).map((business) => (
-                <button
-                  key={business}
-                  onClick={() => handleBusinessChange(business)}
-                  className={`text-left p-6 border-2 rounded-lg hover:bg-gray-50 transition duration-300 hover-elevate ${
-                    selectedBusiness === business
-                      ? "border-cardzify-coral bg-red-50"
-                      : "border-gray-200"
-                  }`}
-                  data-testid={`button-business-${business}`}
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-3 rounded-xl text-white">
+                    {cardTypes[selectedCardType].icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900" data-testid="text-selected-card-type">
+                      {cardTypes[selectedCardType].name}
+                    </h3>
+                    <p className="text-sm text-gray-600">
+                      {businessData[selectedBusiness].description}
+                    </p>
+                  </div>
+                </div>
+
+                <Button
+                  className="w-full bg-cardzify-purple hover:bg-cardzify-purple/90 text-white mb-6"
+                  data-testid="button-install-demo-card"
                 >
-                  <h4 className="text-xl font-bold mb-2 text-gray-900 flex items-center gap-2" data-testid={`title-business-${business}`}>
-                    <span className="text-cardzify-coral">
-                      {business === "cafenele" && <Coffee className="w-6 h-6" />}
-                      {business === "saloane" && <Scissors className="w-6 h-6" />}
-                      {business === "restaurante" && <Pizza className="w-6 h-6" />}
-                    </span>
-                    {business === "cafenele" && "Pentru o cafenea"}
-                    {business === "saloane" && "Pentru un salon"}
-                    {business === "restaurante" && "Pentru un restaurant"}
-                  </h4>
-                  <p className="text-gray-600" data-testid={`description-business-${business}`}>
-                    {business === "cafenele" &&
-                      "Perfect pentru a recompensa clienții fideli cu băuturi gratuite."}
-                    {business === "saloane" &&
-                      "Oferă discounturi sau servicii bonus pentru a crește retenția."}
-                    {business === "restaurante" &&
-                      "Atrage clienți noi cu oferte speciale și recompensează-i pe cei loiali."}
+                  Install demo card
+                </Button>
+
+                <div className="border-t pt-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex-1">
+                      <div className="bg-gray-100 rounded-lg p-4 flex items-center justify-center">
+                        <svg className="w-24 h-24" viewBox="0 0 100 100">
+                          <rect width="100" height="100" fill="white"/>
+                          <rect x="10" y="10" width="10" height="10" fill="black"/>
+                          <rect x="30" y="10" width="10" height="10" fill="black"/>
+                          <rect x="50" y="10" width="10" height="10" fill="black"/>
+                          <rect x="70" y="10" width="10" height="10" fill="black"/>
+                          <rect x="10" y="30" width="10" height="10" fill="black"/>
+                          <rect x="50" y="30" width="10" height="10" fill="black"/>
+                          <rect x="70" y="30" width="10" height="10" fill="black"/>
+                          <rect x="10" y="50" width="10" height="10" fill="black"/>
+                          <rect x="30" y="50" width="10" height="10" fill="black"/>
+                          <rect x="50" y="50" width="10" height="10" fill="black"/>
+                          <rect x="10" y="70" width="10" height="10" fill="black"/>
+                          <rect x="50" y="70" width="10" height="10" fill="black"/>
+                          <rect x="70" y="70" width="10" height="10" fill="black"/>
+                        </svg>
+                      </div>
+                      <p className="text-center text-sm text-gray-600 mt-2">Scan me</p>
+                    </div>
+                    <div className="flex-1 flex flex-col gap-2 ml-4">
+                      <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40'%3E%3Crect width='120' height='40' rx='5' fill='black'/%3E%3Ctext x='60' y='25' font-family='Arial' font-size='12' fill='white' text-anchor='middle'%3EApple Wallet%3C/text%3E%3C/svg%3E"
+                        alt="Add to Apple Wallet"
+                        className="w-full"
+                        data-testid="img-apple-wallet"
+                      />
+                      <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40'%3E%3Crect width='120' height='40' rx='5' fill='white' stroke='%23ccc'/%3E%3Ctext x='60' y='25' font-family='Arial' font-size='12' fill='black' text-anchor='middle'%3EGoogle Wallet%3C/text%3E%3C/svg%3E"
+                        alt="Add to Google Wallet"
+                        className="w-full"
+                        data-testid="img-google-wallet"
+                      />
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 text-center">
+                    Use your phone's default camera to scan the QR-code and install your loyalty card
                   </p>
-                </button>
-              ))}
+                </div>
+              </div>
+
+              <p className="text-lg font-semibold text-gray-700" data-testid="text-business-selector-label">Alege un tip de afacere:</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {(Object.keys(businessData) as BusinessType[]).map((business) => (
+                  <button
+                    key={business}
+                    onClick={() => handleBusinessChange(business)}
+                    className={`text-left p-4 border-2 rounded-lg hover:bg-gray-50 transition duration-300 hover-elevate ${
+                      selectedBusiness === business
+                        ? "border-cardzify-coral bg-red-50"
+                        : "border-gray-200"
+                    }`}
+                    data-testid={`button-business-${business}`}
+                  >
+                    <h4 className="text-lg font-bold mb-1 text-gray-900 flex items-center gap-2" data-testid={`title-business-${business}`}>
+                      <span className="text-cardzify-coral">
+                        {businessData[business].icon}
+                      </span>
+                      {business === "cafenele" && "Cafenele"}
+                      {business === "saloane" && "Saloane"}
+                      {business === "restaurante" && "Restaurante"}
+                      {business === "retail" && "Retail"}
+                      {business === "fitness" && "Fitness"}
+                      {business === "servicii" && "Servicii"}
+                      {business === "hoteluri" && "Hoteluri"}
+                      {business === "tatuaje" && "Tatuaje"}
+                      {business === "vape" && "Vape Shops"}
+                    </h4>
+                    <p className="text-sm text-gray-600" data-testid={`description-business-${business}`}>
+                      {businessData[business].description}
+                    </p>
+                  </button>
+                ))}
+              </div>
               <div className="text-center pt-2">
-                <a
-                  href="/functionalitati"
-                  className="text-sm text-gray-600 hover:text-cardzify-coral transition"
-                  data-testid="link-all-card-types"
-                >
-                  ...și multe altele! Descoperă toate cele 8 tipologii de carduri.
-                </a>
+                <Link href="/functionalitati">
+                  <span className="text-sm text-gray-600 hover:text-cardzify-coral transition cursor-pointer" data-testid="link-all-card-types">
+                    ...și multe altele! Descoperă toate cele 8 tipologii de carduri.
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
