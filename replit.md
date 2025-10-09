@@ -6,6 +6,15 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 
 ## Recent Changes
 
+**Features Page Card Types Update (October 2025)**
+- Updated the 8 card types to match Cardzify's actual offerings
+- Changed: Card cu Puncte → Card de Recompense
+- Changed: Card cu Valoare → Card Cashback (with adapted description)
+- Changed: Card pentru Evenimente → Card Coupon (single-use coupons for new customer acquisition)
+- Changed: Card Combo → Card Multipass
+- Changed: Card cu Vouchere → Gift Card (digital gift cards)
+- Maintained: Card cu Ștampile, Card Discount, Card de Membru
+
 **Solutions Page Expansion (October 2025)**
 - Added 3 new business types to Solutions page: Hoteluri/Pensiuni, Studiouri de Tatuaje, Vape Shops
 - Each new category has custom icon (Hotel, Paintbrush, Cloud) and 4 tailored benefits
@@ -63,8 +72,8 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 
 ### Key Features
 1. **Interactive Card Customization**: Real-time preview of loyalty cards with business-specific designs
-2. **8 Card Types**: Stamps, Points, Value, Discount, Membership, Events, Combo, Vouchers
-3. **Business Solutions**: Tailored for cafes, salons, restaurants, retail, fitness, and services
+2. **8 Card Types**: Ștampile, Recompense, Cashback, Discount, Membru, Coupon, Multipass, Gift Card
+3. **Business Solutions**: Tailored for 9 industries including cafes, salons, restaurants, retail, fitness, services, hotels, tattoo studios, and vape shops
 4. **Contact Form**: With validation and submission handling
 5. **Responsive Design**: Mobile-first with adaptive layouts
 6. **Multi-page Navigation**: Home, Features, Solutions, Integrations, Pricing, Contact
