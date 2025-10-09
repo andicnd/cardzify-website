@@ -217,7 +217,7 @@ export default function Home() {
 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-testid="heading-card-customization">
               Un card de loialitate modern, exact pe gustul afacerii tale.
             </h2>
@@ -228,10 +228,50 @@ export default function Home() {
             </p>
           </div>
 
+          <div className="mb-12">
+            <p className="text-lg font-semibold text-gray-700 mb-6 text-center" data-testid="text-business-selector-label">Alege un tip de afacere:</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {(Object.keys(businessData) as BusinessType[]).map((business) => (
+                <button
+                  key={business}
+                  onClick={() => handleBusinessChange(business)}
+                  className={`flex items-center gap-2 px-4 py-2 border-2 rounded-full hover:bg-gray-50 transition duration-300 hover-elevate ${
+                    selectedBusiness === business
+                      ? "border-cardzify-coral bg-cardzify-coral/10"
+                      : "border-gray-200"
+                  }`}
+                  data-testid={`button-business-${business}`}
+                >
+                  <span className="text-cardzify-coral">
+                    {businessData[business].icon}
+                  </span>
+                  <span className="font-medium text-gray-900">
+                    {business === "cafenele" && "Cafenele"}
+                    {business === "saloane" && "Saloane"}
+                    {business === "restaurante" && "Restaurante"}
+                    {business === "retail" && "Retail"}
+                    {business === "fitness" && "Fitness"}
+                    {business === "servicii" && "Servicii"}
+                    {business === "hoteluri" && "Hoteluri"}
+                    {business === "tatuaje" && "Tatuaje"}
+                    {business === "vape" && "Vape Shops"}
+                  </span>
+                </button>
+              ))}
+            </div>
+            <div className="text-center mt-6">
+              <Link href="/functionalitati">
+                <span className="text-sm text-gray-600 hover:text-cardzify-coral transition cursor-pointer" data-testid="link-all-card-types">
+                  ...și multe altele! Descoperă toate cele 8 tipologii de carduri.
+                </span>
+              </Link>
+            </div>
+          </div>
+
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-start">
-            <div className="mb-12 lg:mb-0">
+            <div className="mb-12 lg:mb-0" data-testid="phone-mockup-container">
               <div className="relative max-w-sm mx-auto">
-                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-[3rem] p-3 shadow-2xl">
+                <div className="relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-[3rem] p-3 shadow-2xl" data-testid="phone-mockup-frame">
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-gray-900 rounded-b-3xl"></div>
                   <div className="bg-white rounded-[2.5rem] overflow-hidden" style={{ aspectRatio: '9/19.5' }}>
                     <div className="h-full bg-gradient-to-br from-gray-100 to-gray-200 p-6 flex items-center justify-center">
@@ -244,7 +284,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6" data-testid="card-details-panel">
               <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="bg-gradient-to-br from-purple-500 to-pink-500 p-3 rounded-xl text-white">
@@ -309,47 +349,6 @@ export default function Home() {
                     Use your phone's default camera to scan the QR-code and install your loyalty card
                   </p>
                 </div>
-              </div>
-
-              <p className="text-lg font-semibold text-gray-700" data-testid="text-business-selector-label">Alege un tip de afacere:</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(Object.keys(businessData) as BusinessType[]).map((business) => (
-                  <button
-                    key={business}
-                    onClick={() => handleBusinessChange(business)}
-                    className={`text-left p-4 border-2 rounded-lg hover:bg-gray-50 transition duration-300 hover-elevate ${
-                      selectedBusiness === business
-                        ? "border-cardzify-coral bg-cardzify-coral/10"
-                        : "border-gray-200"
-                    }`}
-                    data-testid={`button-business-${business}`}
-                  >
-                    <h4 className="text-lg font-bold mb-1 text-gray-900 flex items-center gap-2" data-testid={`title-business-${business}`}>
-                      <span className="text-cardzify-coral">
-                        {businessData[business].icon}
-                      </span>
-                      {business === "cafenele" && "Cafenele"}
-                      {business === "saloane" && "Saloane"}
-                      {business === "restaurante" && "Restaurante"}
-                      {business === "retail" && "Retail"}
-                      {business === "fitness" && "Fitness"}
-                      {business === "servicii" && "Servicii"}
-                      {business === "hoteluri" && "Hoteluri"}
-                      {business === "tatuaje" && "Tatuaje"}
-                      {business === "vape" && "Vape Shops"}
-                    </h4>
-                    <p className="text-sm text-gray-600" data-testid={`description-business-${business}`}>
-                      {businessData[business].description}
-                    </p>
-                  </button>
-                ))}
-              </div>
-              <div className="text-center pt-2">
-                <Link href="/functionalitati">
-                  <span className="text-sm text-gray-600 hover:text-cardzify-coral transition cursor-pointer" data-testid="link-all-card-types">
-                    ...și multe altele! Descoperă toate cele 8 tipologii de carduri.
-                  </span>
-                </Link>
               </div>
             </div>
           </div>
