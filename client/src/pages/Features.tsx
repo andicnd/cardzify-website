@@ -63,17 +63,17 @@ export default function Features() {
       icon: <Check className="w-10 h-10 text-cardzify-coral" />,
     },
     {
-      name: "Card cu Puncte",
+      name: "Card de Recompense",
       description: "Acumulează puncte în funcție de valoarea achiziției. Punctele pot fi schimbate pe recompense.",
       icon: <Star className="w-10 h-10 text-cardzify-coral" />,
     },
     {
-      name: "Card cu Valoare",
-      description: "Un card prepaid pe care clienții îl pot încărca cu bani și folosi pentru achiziții.",
+      name: "Card Cashback",
+      description: "Returnează un procent din valoarea achizițiilor direct în contul clientului.",
       icon: <Wallet className="w-10 h-10 text-cardzify-coral" />,
     },
     {
-      name: "Card cu Discount",
+      name: "Card Discount",
       description: "Oferă reduceri permanente sau temporare clienților fideli.",
       icon: <Percent className="w-10 h-10 text-cardzify-coral" />,
     },
@@ -83,18 +83,18 @@ export default function Features() {
       icon: <Crown className="w-10 h-10 text-cardzify-coral" />,
     },
     {
-      name: "Card pentru Evenimente",
-      description: "Perfect pentru evenimente speciale, conferințe sau cursuri.",
+      name: "Card Coupon",
+      description: "Cupoane care pot fi folosite o singură dată pentru a atrage clienți noi.",
       icon: <Ticket className="w-10 h-10 text-cardzify-coral" />,
     },
     {
-      name: "Card Combo",
+      name: "Card Multipass",
       description: "Combină mai multe tipuri de carduri într-unul singur pentru flexibilitate maximă.",
       icon: <Target className="w-10 h-10 text-cardzify-coral" />,
     },
     {
-      name: "Card cu Vouchere",
-      description: "Distribuie vouchere digitale pe care clienții le pot folosi ulterior.",
+      name: "Gift Card",
+      description: "Card cadou digital pe care clienții îl pot oferi prietenilor și familiei.",
       icon: <Gift className="w-10 h-10 text-cardzify-coral" />,
     },
   ];
