@@ -230,7 +230,7 @@ export default function Home() {
 
           <div className="mb-12">
             <p className="text-lg font-semibold text-gray-700 mb-6 text-center" data-testid="text-business-selector-label">Alege un tip de afacere:</p>
-            <div className="overflow-x-auto pb-2">
+            <div className="overflow-x-auto pb-4 scrollbar-thin">
               <div className="flex justify-center gap-3 min-w-max px-4">
                 {(Object.keys(businessData) as BusinessType[]).map((business) => (
                   <button
