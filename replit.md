@@ -6,6 +6,22 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 
 ## Recent Changes
 
+**CTA Buttons Enhancement (October 2025)**
+- Replaced Apple/Google Wallet buttons in "Direct în telefon, fără aplicații" section with conversion-focused CTAs:
+  - "Începe gratuit" button (coral, links to /preturi)
+  - "Instalează card demo" button (purple outline, links to /contact)
+- Added CTA section at bottom of Solutions page:
+  - "Vezi prețurile" button (links to /preturi)
+  - "Contactează-ne" button (links to /contact)
+  - Heading: "Gata să îți transformi clienții în fani?"
+- Added CTA section at bottom of Features page:
+  - "Instalează card demo" button (coral, links to /contact)
+  - "Vezi planurile" button (purple outline, links to /preturi)
+  - Heading: "Începe acum și transformă clienții în fani"
+- All "Instalează card demo" buttons throughout the site now link to /contact for demo requests
+- Responsive design: flex-col sm:flex-row for mobile/desktop compatibility
+- Consistent styling using Cardzify brand colors (coral #F25C54, purple #2C2645)
+
 **Home Page Business Showcase Enhancement (October 2025)**
 - Expanded business type showcase from 3 to all 9 industries (Cafenele, Saloane, Restaurante, Retail, Fitness, Servicii, Hoteluri, Tatuaje, Vape Shops)
 - Compact phone mockup design: loyalty card displayed inside realistic device frame (max-w-xs, aspect 9/16) with notch and bezels
