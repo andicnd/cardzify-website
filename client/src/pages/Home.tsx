@@ -352,7 +352,7 @@ export default function Home() {
                     </div>
                   </div>
                   <p className="text-xs text-gray-500 text-center">
-                    Use your phone's default camera to scan the QR-code and install your loyalty card
+                    Folosește camera telefonului pentru a scana codul QR și instala cardul de loialitate
                   </p>
                 </div>
               </div>
