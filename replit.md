@@ -10,12 +10,16 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 - Expanded business type showcase from 3 to all 9 industries (Cafenele, Saloane, Restaurante, Retail, Fitness, Servicii, Hoteluri, Tatuaje, Vape Shops)
 - Compact phone mockup design: loyalty card displayed inside realistic device frame (max-w-xs, aspect 9/16) with notch and bezels
 - Implemented card type pairing system: each business automatically shows most suitable card type
-- Business selector: single horizontal line with scroll (overflow-x-auto), pill-style buttons (rounded-full), all 9 on same line
+- Business selector: single horizontal line with custom coral scrollbar (scrollbar-thin class), pill-style buttons (rounded-full), all 9 on same line
 - Compact loyalty card: reduced padding (p-4), smaller fonts (text-lg/xs), tighter element spacing for proportional display
 - Card details panel with two prominent buttons:
   - "Instalează card demo" (purple background, full width)
   - "Descoperă alte carduri" (coral outline, links to /functionalitati)
-- QR code and wallet badges section below buttons
+- Redesigned wallet section: compact grid layout with QR code (left) and wallet buttons (right)
+  - Apple Wallet button: black background with Apple icon (Lucide), shadcn Button component
+  - Google Wallet button: white with border, official Google "G" logo, shadcn Button outline variant
+  - Both buttons: dark mode support, accessibility attributes (aria-hidden), complete test IDs
+- Romanian interface throughout, including wallet instruction: "Folosește camera telefonului pentru a scana codul QR și a instala cardul de loialitate"
 - Layout structure: business selector (top, scrollable) → phone mockup (left, compact) + card details (right, with buttons)
 - Responsive design: horizontal scroll for selector, grid stacks vertically on mobile
 
