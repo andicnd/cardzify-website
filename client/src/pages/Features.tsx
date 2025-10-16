@@ -1,4 +1,6 @@
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { 
   Palette, 
   Bell, 
@@ -140,6 +142,35 @@ export default function Features() {
                 <p className="text-sm text-gray-600" data-testid={`description-card-type-${idx}`}>{cardType.description}</p>
               </Card>
             ))}
+          </div>
+
+          {/* CTA Section */}
+          <div className="text-center max-w-3xl mx-auto mt-20">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4" data-testid="heading-features-cta">
+              Începe acum și transformă clienții în fani
+            </h3>
+            <p className="text-lg text-gray-600 mb-8" data-testid="text-features-cta">
+              Crează primul tău card digital de loialitate în doar câteva minute.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="/contact">
+                <Button
+                  className="bg-cardzify-coral text-white hover:bg-cardzify-coral/90 px-8 py-6 text-base w-full sm:w-auto"
+                  data-testid="button-features-demo"
+                >
+                  Instalează card demo
+                </Button>
+              </Link>
+              <Link href="/preturi">
+                <Button
+                  variant="outline"
+                  className="border-cardzify-purple text-cardzify-purple hover:bg-cardzify-purple/10 px-8 py-6 text-base w-full sm:w-auto"
+                  data-testid="button-features-pricing"
+                >
+                  Vezi planurile
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

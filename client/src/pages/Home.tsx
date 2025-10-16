@@ -295,12 +295,14 @@ export default function Home() {
                   </div>
                 </div>
 
-                <Button
-                  className="w-full bg-cardzify-purple hover:bg-cardzify-purple/90 text-white"
-                  data-testid="button-install-demo-card"
-                >
-                  Instalează card demo
-                </Button>
+                <Link href="/contact">
+                  <Button
+                    className="w-full bg-cardzify-purple hover:bg-cardzify-purple/90 text-white"
+                    data-testid="button-install-demo-card"
+                  >
+                    Instalează card demo
+                  </Button>
+                </Link>
                 
                 <Link href="/functionalitati">
                   <Button
@@ -484,25 +486,23 @@ export default function Home() {
                 plastic, fără aplicații de instalat, cardul este mereu la îndemâna lor.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  variant="outline"
-                  className="flex items-center justify-center bg-black text-white hover:bg-gray-800 border-0"
-                  data-testid="button-apple-wallet-2"
-                >
-                  <span className="text-2xl mr-2"></span> Adaugă în Apple Wallet
-                </Button>
-                <Button
-                  variant="outline"
-                  className="flex items-center justify-center bg-white border border-gray-300 text-gray-800 hover:bg-gray-100"
-                  data-testid="button-google-wallet-2"
-                >
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png"
-                    className="w-6 h-6 mr-2"
-                    alt="Google Logo"
-                  />
-                  Adaugă în Google Wallet
-                </Button>
+                <Link href="/preturi">
+                  <Button
+                    className="bg-cardzify-coral text-white hover:bg-cardzify-coral/90 px-8 py-6 text-base w-full sm:w-auto"
+                    data-testid="button-signup-cta"
+                  >
+                    Începe gratuit
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button
+                    variant="outline"
+                    className="border-cardzify-purple text-cardzify-purple hover:bg-cardzify-purple/10 px-8 py-6 text-base w-full sm:w-auto"
+                    data-testid="button-demo-card-cta"
+                  >
+                    Instalează card demo
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -517,13 +517,11 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="p-8 bg-[#372E4F] border-0" data-testid="testimonial-0">
               <p className="text-gray-300 mb-6 italic" data-testid="text-testimonial-quote-0">
-                "De când folosim Cardzify, am observat o creștere de 30% a clienților
-                recurenți. Este incredibil de simplu de folosit atât pentru noi, cât și
-                pentru clienți."
+                "Cardzify ne-a ajutat să comunicăm mai eficient cu clienții noștri folosind notificările push. Notificările sunt gratuite și putem informa clienții despre ofertele noastre în timp real. Recomand cu Încredere!"
               </p>
               <div>
-                <p className="font-bold text-white" data-testid="text-testimonial-author-0">Ana Popescu</p>
-                <p className="text-sm text-pink-300" data-testid="text-testimonial-role-0">Proprietar, The Coffee Bean</p>
+                <p className="font-bold text-white" data-testid="text-testimonial-author-0">Radu Giurea</p>
+                <p className="text-sm text-pink-300" data-testid="text-testimonial-role-0">Proprietar, Gyros&Doner Constanța</p>
               </div>
             </Card>
             <Card className="p-8 bg-[#372E4F] border-0" data-testid="testimonial-1">
@@ -532,8 +530,8 @@ export default function Home() {
                 îl pierd. Funcția de notificări pentru oferte este un bonus extraordinar."
               </p>
               <div>
-                <p className="font-bold text-white" data-testid="text-testimonial-author-1">Elena Ionescu</p>
-                <p className="text-sm text-pink-300" data-testid="text-testimonial-role-1">Manager, Glamour Studio</p>
+                <p className="font-bold text-white" data-testid="text-testimonial-author-1">Ana Solomon </p>
+                <p className="text-sm text-pink-300" data-testid="text-testimonial-role-1">Eyelash technician, Eyelash Attitude</p>
               </div>
             </Card>
             <Card className="p-8 bg-[#372E4F] border-0" data-testid="testimonial-2">
@@ -542,8 +540,8 @@ export default function Home() {
                 Acum putem crea oferte mult mai relevante. Recomand!"
               </p>
               <div>
-                <p className="font-bold text-white" data-testid="text-testimonial-author-2">Mihai Dinu</p>
-                <p className="text-sm text-pink-300" data-testid="text-testimonial-role-2">Proprietar, Pizza Palace</p>
+                <p className="font-bold text-white" data-testid="text-testimonial-author-2">Delia Bobeică</p>
+                <p className="text-sm text-pink-300" data-testid="text-testimonial-role-2">Proprietar, Atelier DareDesign</p>
               </div>
             </Card>
           </div>

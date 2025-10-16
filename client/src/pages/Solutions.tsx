@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Coffee, Scissors, Pizza, ShoppingBag, Dumbbell, Wrench, Hotel, Paintbrush, Cloud } from "lucide-react";
+import { Link } from "wouter";
 
 type Industry = "cafenele" | "saloane" | "restaurante" | "retail" | "fitness" | "servicii" | "hoteluri" | "tatuaje" | "vape";
 
@@ -177,6 +178,35 @@ export default function Solutions() {
               ))}
             </div>
           </Card>
+
+          {/* CTA Section */}
+          <div className="text-center max-w-3xl mx-auto mt-16">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4" data-testid="heading-solutions-cta">
+              Gata să îți transformi clienții în fani?
+            </h3>
+            <p className="text-lg text-gray-600 mb-8" data-testid="text-solutions-cta">
+              Alege planul potrivit pentru afacerea ta și începe să construiești loialitate astăzi.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="/preturi">
+                <Button
+                  className="bg-cardzify-coral text-white hover:bg-cardzify-coral/90 px-8 py-6 text-base w-full sm:w-auto"
+                  data-testid="button-solutions-pricing"
+                >
+                  Vezi prețurile
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button
+                  variant="outline"
+                  className="border-cardzify-purple text-cardzify-purple hover:bg-cardzify-purple/10 px-8 py-6 text-base w-full sm:w-auto"
+                  data-testid="button-solutions-contact"
+                >
+                  Contactează-ne
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>
