@@ -296,11 +296,21 @@ export default function Home() {
                 </div>
 
                 <Button
-                  className="w-full bg-cardzify-purple hover:bg-cardzify-purple/90 text-white mb-6"
+                  className="w-full bg-cardzify-purple hover:bg-cardzify-purple/90 text-white"
                   data-testid="button-install-demo-card"
                 >
-                  Install demo card
+                  Instalează card demo
                 </Button>
+                
+                <Link href="/functionalitati">
+                  <Button
+                    variant="outline"
+                    className="w-full mt-3 mb-6 border-cardzify-coral text-cardzify-coral hover:bg-cardzify-coral/10"
+                    data-testid="button-discover-cards"
+                  >
+                    Descoperă alte carduri
+                  </Button>
+                </Link>
 
                 <div className="border-t pt-6">
                   <div className="flex items-center justify-between mb-4">
@@ -344,14 +354,6 @@ export default function Home() {
                     Use your phone's default camera to scan the QR-code and install your loyalty card
                   </p>
                 </div>
-              </div>
-              
-              <div className="text-center">
-                <Link href="/functionalitati">
-                  <span className="text-sm text-gray-600 hover:text-cardzify-coral transition cursor-pointer" data-testid="link-all-card-types">
-                    ...și multe altele! Descoperă toate cele 8 tipologii de carduri.
-                  </span>
-                </Link>
               </div>
             </div>
           </div>

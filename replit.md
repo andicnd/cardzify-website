@@ -12,9 +12,11 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 - Implemented card type pairing system: each business automatically shows most suitable card type
 - Business selector: single horizontal line with scroll (overflow-x-auto), pill-style buttons (rounded-full), all 9 on same line
 - Compact loyalty card: reduced padding (p-4), smaller fonts (text-lg/xs), tighter element spacing for proportional display
-- Added complete card details panel: card type icon, description, "Install demo card" button, QR code, wallet badges
-- Link to features page positioned within card details panel: "...și multe altele! Descoperă toate cele 8 tipologii de carduri"
-- Layout structure: business selector (top, scrollable) → phone mockup (left, compact) + card details (right, with link)
+- Card details panel with two prominent buttons:
+  - "Instalează card demo" (purple background, full width)
+  - "Descoperă alte carduri" (coral outline, links to /functionalitati)
+- QR code and wallet badges section below buttons
+- Layout structure: business selector (top, scrollable) → phone mockup (left, compact) + card details (right, with buttons)
 - Responsive design: horizontal scroll for selector, grid stacks vertically on mobile
 
 **Features Page Card Types Update (October 2025)**
