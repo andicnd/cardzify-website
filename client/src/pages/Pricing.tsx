@@ -1,132 +1,178 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import { Link } from "wouter";
 
+type BillingPeriod = "lunar" | "trimestrial" | "anual";
+
 export default function Pricing() {
-  const plans = [
+  const [selectedPeriod, setSelectedPeriod] = useState<BillingPeriod>("lunar");
+
+  const billingOptions = [
     {
-      name: "Start",
-      price: "0",
+      id: "lunar" as BillingPeriod,
+      label: "Lunar",
+      price: 349,
       period: "RON/lună",
-      description: "Perfect pentru a testa platforma.",
-      features: [
-        "Până la 50 de clienți",
-        "1 locație",
-        "Design card standard",
-      ],
-      cta: "Începe gratuit",
-      ctaVariant: "outline" as const,
-      borderColor: "border-gray-300",
-      popular: false,
     },
     {
-      name: "Pro",
-      price: "129",
-      period: "RON/lună",
-      description: "Soluția completă pentru creșterea afacerii tale.",
-      features: [
-        "Clienți nelimitați",
-        "Până la 3 locații",
-        "Personalizare avansată card",
-        "Notificări Push",
-        "Analiză & CRM",
-      ],
-      cta: "Alege Pro",
-      ctaVariant: "default" as const,
-      borderColor: "border-cardzify-coral",
-      popular: true,
+      id: "trimestrial" as BillingPeriod,
+      label: "Trimestrial",
+      price: 899,
+      period: "RON/trimestru",
+      savings: "Economisești 11%",
     },
     {
-      name: "Enterprise",
-      price: "Contact",
-      period: "",
-      description: "Pentru afaceri cu nevoi personalizate și multiple locații.",
-      features: [
-        "Totul din Pro",
-        "Locații nelimitate",
-        "Integrări custom",
-        "Suport prioritar",
-      ],
-      cta: "Contactează-ne",
-      ctaVariant: "outline" as const,
-      borderColor: "border-gray-800",
-      popular: false,
-      isContact: true,
+      id: "anual" as BillingPeriod,
+      label: "Anual",
+      price: 2999,
+      period: "RON/an",
+      savings: "Economisești 28%",
     },
   ];
+
+  const features = [
+    "Clienți nelimitați",
+    "Locații nelimitate",
+    "Personalizare completă a cardurilor",
+    "Notificări Push inteligente",
+    "Analiză avansată & CRM",
+    "QR Code pentru scanare rapidă",
+    "Integrare Apple & Google Wallet",
+    "Rapoarte și statistici detaliate",
+    "Suport prioritar",
+    "API pentru integrări custom",
+  ];
+
+  const selectedOption = billingOptions.find((opt) => opt.id === selectedPeriod)!;
 
   return (
     <div className="animate-fadeIn">
       <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4" data-testid="heading-pricing">
-            Planuri tarifare simple și transparente
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-12" data-testid="text-pricing-description">
-            Alege planul care se potrivește afacerii tale. Începe gratuit, fără niciun risc.
-          </p>
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4" data-testid="heading-pricing">
+              Planuri tarifare simple și transparente
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto" data-testid="text-pricing-description">
+              Un singur plan, toate funcționalitățile. Alege ciclul de facturare care ți se potrivește.
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {plans.map((plan) => (
+          {/* Billing Period Selector */}
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+            {billingOptions.map((option) => (
               <Card
-                key={plan.name}
-                className={`p-8 border-t-4 ${plan.borderColor} relative transition-all hover:scale-105 hover:shadow-xl`}
-                data-testid={`card-pricing-${plan.name.toLowerCase()}`}
+                key={option.id}
+                className={`p-6 cursor-pointer hover-elevate active-elevate-2 flex-1 sm:flex-none sm:min-w-[200px] ${
+                  selectedPeriod === option.id 
+                    ? "bg-cardzify-coral text-white" 
+                    : "bg-white"
+                }`}
+                onClick={() => setSelectedPeriod(option.id)}
+                data-testid={`card-billing-${option.id}`}
               >
-                {plan.popular && (
-                  <p className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-cardzify-coral text-white px-4 py-1 rounded-full font-semibold text-sm" data-testid="badge-popular">
-                    Cel mai popular
-                  </p>
-                )}
-
-                <h3 className="text-2xl font-bold mb-4" data-testid={`title-plan-${plan.name.toLowerCase()}`}>{plan.name}</h3>
-                <p className="text-4xl font-extrabold mb-4" data-testid={`text-price-${plan.name.toLowerCase()}`}>
-                  {plan.price}
-                  {plan.period && <span className="text-lg font-medium text-gray-500"> {plan.period}</span>}
-                </p>
-                <p className="text-gray-600 mb-6 h-12" data-testid={`text-plan-description-${plan.name.toLowerCase()}`}>{plan.description}</p>
-
-                <ul className="text-left space-y-3 mb-8">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2" data-testid={`feature-${plan.name.toLowerCase()}-${idx}`}>
-                      <Check className="text-cardzify-coral w-5 h-5 flex-shrink-0" data-testid={`icon-check-${plan.name.toLowerCase()}-${idx}`} />
-                      <span data-testid={`text-feature-${plan.name.toLowerCase()}-${idx}`}>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {plan.isContact ? (
-                  <Link href="/contact">
-                    <Button
-                      variant={plan.ctaVariant}
-                      className={`w-full ${
-                        plan.ctaVariant === "default"
-                          ? "bg-cardzify-coral hover:bg-cardzify-coral/90"
-                          : plan.name === "Enterprise"
-                          ? "bg-gray-800 text-white hover:bg-gray-700"
-                          : ""
-                      }`}
-                      data-testid={`button-cta-${plan.name.toLowerCase()}`}
-                    >
-                      {plan.cta}
-                    </Button>
-                  </Link>
-                ) : (
-                  <Button
-                    variant={plan.ctaVariant}
-                    className={`w-full ${
-                      plan.ctaVariant === "default"
-                        ? "bg-cardzify-coral hover:bg-cardzify-coral/90"
-                        : ""
-                    }`}
-                    data-testid={`button-cta-${plan.name.toLowerCase()}`}
-                  >
-                    {plan.cta}
-                  </Button>
-                )}
+                <div className="text-center">
+                  <div className="text-xl font-bold mb-2" data-testid={`text-billing-label-${option.id}`}>
+                    {option.label}
+                  </div>
+                  <div className="text-3xl font-extrabold mb-1" data-testid={`text-price-${option.id}`}>
+                    {option.price} RON
+                  </div>
+                  <div className={`text-sm ${selectedPeriod === option.id ? "opacity-90" : "text-gray-600"}`} data-testid={`text-period-${option.id}`}>
+                    {option.period}
+                  </div>
+                  {option.savings && (
+                    <div className="text-sm font-semibold mt-2" data-testid={`text-savings-${option.id}`}>
+                      {option.savings}
+                    </div>
+                  )}
+                </div>
               </Card>
             ))}
+          </div>
+
+          {/* Main Plan Card */}
+          <div className="max-w-4xl mx-auto">
+            <Card className="p-8 lg:p-12 border-t-4 border-cardzify-coral shadow-xl">
+              <div className="text-center mb-8">
+                <h3 className="text-3xl font-bold mb-4" data-testid="heading-plan-name">
+                  Cardzify Complete
+                </h3>
+                <div className="mb-6">
+                  <p className="text-5xl font-extrabold text-cardzify-purple mb-2" data-testid="text-selected-price">
+                    {selectedOption.price} RON
+                  </p>
+                  <p className="text-lg text-gray-600" data-testid="text-selected-period">
+                    {selectedOption.period}
+                  </p>
+                  {selectedOption.savings && (
+                    <p className="text-lg font-semibold text-cardzify-coral mt-2" data-testid="text-selected-savings">
+                      {selectedOption.savings}
+                    </p>
+                  )}
+                </div>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto" data-testid="text-plan-description">
+                  Accesează toate funcționalitățile platformei Cardzify pentru a-ți transforma clienții în fani loiali.
+                </p>
+              </div>
+
+              {/* Features Grid */}
+              <div className="grid md:grid-cols-2 gap-4 mb-8">
+                {features.map((feature, idx) => (
+                  <div key={idx} className="flex items-center gap-3" data-testid={`feature-item-${idx}`}>
+                    <div className="bg-cardzify-coral/10 rounded-full p-1">
+                      <Check className="text-cardzify-coral w-5 h-5" data-testid={`icon-check-${idx}`} />
+                    </div>
+                    <span className="text-gray-700" data-testid={`text-feature-${idx}`}>{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                <Button
+                  size="lg"
+                  className="bg-cardzify-coral text-white"
+                  data-testid="button-start-trial"
+                >
+                  Începe perioada de probă gratuită
+                </Button>
+                <Link href="/contact">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    data-testid="button-contact-sales"
+                  >
+                    Contactează vânzările
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Additional Info */}
+              <p className="text-center text-sm text-gray-500 mt-6" data-testid="text-trial-info">
+                Perioadă de probă gratuită de 14 zile • Anulare oricând • Fără comision de setup
+              </p>
+            </Card>
+          </div>
+
+          {/* FAQ or Additional Info */}
+          <div className="text-center mt-16 max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold mb-4" data-testid="heading-need-help">
+              Ai nevoie de ajutor să alegi?
+            </h3>
+            <p className="text-gray-600 mb-6" data-testid="text-help-description">
+              Echipa noastră este aici să te ajute să găsești soluția perfectă pentru afacerea ta.
+            </p>
+            <Link href="/contact">
+              <Button
+                variant="outline"
+                data-testid="button-help-contact"
+              >
+                Contactează-ne
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
