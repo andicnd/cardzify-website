@@ -113,7 +113,7 @@ const cardTypes: CardType[] = [
       content: (
         <div className="space-y-3">
           <div className="bg-gradient-to-br from-red-500 to-pink-600 p-4 rounded-lg text-white relative overflow-hidden">
-            <div className="absolute top-2 right-2 text-6xl opacity-10">🎁</div>
+            <Gift className="absolute top-2 right-2 w-16 h-16 opacity-10" />
             <div className="text-sm mb-1">GIFT CARD</div>
             <div className="text-4xl font-bold mb-2">150 RON</div>
             <div className="text-xs opacity-90">Pentru: Maria</div>
@@ -233,10 +233,8 @@ const cardTypes: CardType[] = [
       secondaryColor: "#D1FAE5",
       content: (
         <div className="space-y-3">
-          <div className="bg-gradient-to-r from-emerald-500 to-green-600 p-4 rounded-lg text-white relative">
-            <div className="absolute top-0 right-0 w-full h-full opacity-10">
-              <div className="absolute top-2 right-2 text-6xl">🎫</div>
-            </div>
+          <div className="bg-gradient-to-r from-emerald-500 to-green-600 p-4 rounded-lg text-white relative overflow-hidden">
+            <Ticket className="absolute top-2 right-2 w-16 h-16 opacity-10" />
             <div className="text-sm mb-1">CUPON SPECIAL</div>
             <div className="text-3xl font-bold">PIZZA GRATUITĂ</div>
             <div className="text-xs mt-2">la prima comandă</div>
