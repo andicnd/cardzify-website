@@ -6,6 +6,19 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 
 ## Recent Changes
 
+**Pricing Page Redesign (October 2025)**
+- Redesigned pricing page with single plan model: "Cardzify Complete"
+- Interactive billing period selector with 3 options:
+  - Lunar: 349 RON/lună
+  - Trimestrial: 899 RON/trimestru (Economisești 11%)
+  - Anual: 2.999 RON/an (Economisești 28%)
+- Dynamic price updates based on selected billing period
+- Billing selector uses Card components with hover-elevate and active-elevate-2
+- Complete feature list: 10 features displayed in 2-column grid
+- CTAs: "Începe perioada de probă gratuită" and "Contactează vânzările"
+- Fully compliant with Shadcn component usage guidelines (no custom hover states)
+- Responsive design for mobile and desktop
+
 **CTA Buttons Enhancement (October 2025)**
 - Replaced Apple/Google Wallet buttons in "Direct în telefon, fără aplicații" section with conversion-focused CTAs:
   - "Începe gratuit" button (coral, links to /preturi)
