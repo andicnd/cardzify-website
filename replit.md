@@ -6,29 +6,6 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 
 ## Recent Changes
 
-**Card Types Carousel Implementation (October 2025)**
-- Transformed static grid of 8 card types into infinite loop horizontal carousel
-- Created CardTypeCarousel component using Embla Carousel with autoplay
-- Each card type displays in realistic phone mockup with:
-  - Device frame with notch and status bar
-  - Brand-specific colors and design
-  - Example content showing card functionality
-  - Category badge (Retention/Acquisition)
-- Responsive design: 3 cards on desktop, 2 on tablet, 1 on mobile
-- Autoplay enabled (3 second delay, infinite loop)
-- Gradient overlays on edges for seamless infinite effect
-- All visual elements use Lucide icons (no emoji)
-- Full data-testid coverage for testing
-- Includes 8 card types:
-  - Card cu Ștampile (stamp progress tracker)
-  - Card de Recompense (points balance system)
-  - Gift Card (digital gift cards)
-  - Card Cashback (cashback rewards)
-  - Card Discount (discount percentages)
-  - Card de Membru (membership tiers)
-  - Card Coupon (single-use coupons)
-  - Card Multipass (multi-feature combination)
-
 **Pricing Page Redesign (October 2025)**
 - Redesigned pricing page with single plan model: "Cardzify Complete"
 - Interactive billing period selector with 3 options:

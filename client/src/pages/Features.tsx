@@ -7,9 +7,16 @@ import {
   BarChart3, 
   Smartphone, 
   Zap, 
-  TrendingUp
+  TrendingUp, 
+  Check, 
+  Star, 
+  Wallet, 
+  Percent, 
+  Crown, 
+  Ticket, 
+  Target, 
+  Gift 
 } from "lucide-react";
-import CardTypeCarousel from "@/components/CardTypeCarousel";
 
 export default function Features() {
   const features = [
@@ -51,6 +58,48 @@ export default function Features() {
     },
   ];
 
+  const cardTypes = [
+    {
+      name: "Card cu Ștampile",
+      description: "Clienții primesc o ștampilă la fiecare achiziție. La 10 ștampile, recompensa este activată.",
+      icon: <Check className="w-10 h-10 text-cardzify-coral" />,
+    },
+    {
+      name: "Card de Recompense",
+      description: "Acumulează puncte în funcție de valoarea achiziției. Punctele pot fi schimbate pe recompense.",
+      icon: <Star className="w-10 h-10 text-cardzify-coral" />,
+    },
+    {
+      name: "Card Cashback",
+      description: "Returnează un procent din valoarea achizițiilor, sub formă de puncte, direct pe cardul clientului.",
+      icon: <Wallet className="w-10 h-10 text-cardzify-coral" />,
+    },
+    {
+      name: "Card Discount",
+      description: "Oferă reduceri permanente sau temporare clienților fideli.",
+      icon: <Percent className="w-10 h-10 text-cardzify-coral" />,
+    },
+    {
+      name: "Card de Membru",
+      description: "Acces exclusiv pentru membrii programului tău de fidelitate.",
+      icon: <Crown className="w-10 h-10 text-cardzify-coral" />,
+    },
+    {
+      name: "Card Coupon",
+      description: "Cupoane digitale care pot fi folosite o singură dată pentru a atrage clienți noi.",
+      icon: <Ticket className="w-10 h-10 text-cardzify-coral" />,
+    },
+    {
+      name: "Card Multipass",
+      description: "Combină mai multe tipuri de carduri într-unul singur pentru flexibilitate maximă.",
+      icon: <Target className="w-10 h-10 text-cardzify-coral" />,
+    },
+    {
+      name: "Gift Card",
+      description: "Card cadou digital pe care clienții îl pot oferi prietenilor și familiei.",
+      icon: <Gift className="w-10 h-10 text-cardzify-coral" />,
+    },
+  ];
 
   return (
     <div className="animate-fadeIn">
@@ -76,7 +125,7 @@ export default function Features() {
             ))}
           </div>
 
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-testid="heading-card-types">
               8 tipuri de carduri pentru orice afacere
             </h2>
@@ -85,7 +134,15 @@ export default function Features() {
             </p>
           </div>
 
-          <CardTypeCarousel />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {cardTypes.map((cardType, idx) => (
+              <Card key={idx} className="p-6 text-center hover-elevate" data-testid={`card-type-${idx}`}>
+                <div className="text-cardzify-coral mb-3 flex justify-center" data-testid={`icon-card-type-${idx}`}>{cardType.icon}</div>
+                <h3 className="font-bold mb-2" data-testid={`title-card-type-${idx}`}>{cardType.name}</h3>
+                <p className="text-sm text-gray-600" data-testid={`description-card-type-${idx}`}>{cardType.description}</p>
+              </Card>
+            ))}
+          </div>
 
           {/* CTA Section */}
           <div className="text-center max-w-3xl mx-auto mt-20">
@@ -98,8 +155,7 @@ export default function Features() {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link href="/contact">
                 <Button
-                  size="lg"
-                  className="bg-cardzify-coral text-white w-full sm:w-auto"
+                  className="bg-cardzify-coral text-white hover:bg-cardzify-coral/90 px-8 py-6 text-base w-full sm:w-auto"
                   data-testid="button-features-demo"
                 >
                   Instalează card demo
@@ -107,9 +163,8 @@ export default function Features() {
               </Link>
               <Link href="/preturi">
                 <Button
-                  size="lg"
                   variant="outline"
-                  className="w-full sm:w-auto"
+                  className="border-cardzify-purple text-cardzify-purple hover:bg-cardzify-purple/10 px-8 py-6 text-base w-full sm:w-auto"
                   data-testid="button-features-pricing"
                 >
                   Vezi planurile
