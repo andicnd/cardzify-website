@@ -12,6 +12,9 @@ import Features from "@/pages/Features";
 import Solutions from "@/pages/Solutions";
 import Integrations from "@/pages/Integrations";
 import Contact from "@/pages/Contact";
+import TermsAndConditions from "@/pages/TermsAndConditions";
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
+import Articles from "@/pages/Articles";
 
 const pageMetadata: Record<string, { title: string; description: string }> = {
   '/': {
@@ -37,6 +40,18 @@ const pageMetadata: Record<string, { title: string; description: string }> = {
   '/contact': {
     title: 'Contact Cardzify - Transformă Vizitatorii în Clienți Fideli',
     description: 'Contactează echipa Cardzify pentru o demonstrație personalizată. Descoperă cum cardurile de loialitate digitale pot transforma afacerea ta.'
+  },
+  '/termeni-si-conditii': {
+    title: 'Termeni și Condiții - Cardzify',
+    description: 'Citește termenii și condițiile de utilizare a platformei Cardzify pentru carduri de loialitate digitale.'
+  },
+  '/politica-de-confidentialitate': {
+    title: 'Politica de Confidențialitate - Cardzify',
+    description: 'Află cum Cardzify protejează și gestionează datele tale personale în conformitate cu GDPR.'
+  },
+  '/articole': {
+    title: 'Articole și Resurse - Cardzify',
+    description: 'Descoperă articole utile, sfaturi și cele mai bune practici pentru programele de loialitate digitale.'
   }
 };
 
@@ -108,6 +123,9 @@ function App() {
               <Route path="/solutii" component={Solutions} />
               <Route path="/integrari" component={Integrations} />
               <Route path="/contact" component={Contact} />
+              <Route path="/termeni-si-conditii" component={TermsAndConditions} />
+              <Route path="/politica-de-confidentialitate" component={PrivacyPolicy} />
+              <Route path="/articole" component={Articles} />
             </Switch>
           </main>
           <Footer />

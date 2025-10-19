@@ -6,6 +6,24 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 
 ## Recent Changes
 
+**New Pages and Mockup Configuration (October 2025)**
+- Added three new pages to the website:
+  - Termeni și Condiții (/termeni-si-conditii) - comprehensive terms and conditions
+  - Politica de Confidențialitate (/politica-de-confidentialitate) - GDPR-compliant privacy policy
+  - Articole (/articole) - articles and resources page with placeholder content
+- Updated Footer component with new "Resurse" section linking to the new pages
+- Implemented configurable mockup images for Home page business cards:
+  - Replaced hardcoded LoyaltyCard component with LoyaltyCardMockup using image URLs
+  - Added mockupImage field to businessData for easy future updates
+  - Users can now change mockup images by simply updating the URL in the configuration
+- Enhanced Features page "8 tipuri de carduri" section:
+  - Added mockupImage field to each card type
+  - Implemented CardTypesCarousel component with automatic horizontal scrolling
+  - Smooth infinite scroll animation using requestAnimationFrame
+  - Cards displayed in horizontal layout with images, icons, titles, and descriptions
+- SEO metadata added for all new pages in both App.tsx and server/routes.ts
+- All changes maintain responsive design and accessibility standards
+
 **Pricing Page Redesign (October 2025)**
 - Redesigned pricing page with single plan model: "Cardzify Complete"
 - Interactive billing period selector with 3 options:
@@ -125,12 +143,15 @@ Cardzify is a Romanian-language loyalty card platform that enables businesses to
 6. **Multi-page Navigation**: Home, Features, Solutions, Integrations, Pricing, Contact
 
 ### Pages
-- **Home** (`/`): Hero section, interactive card preview, benefits, testimonials
-- **Pricing** (`/preturi`): 3-tier pricing (Start free, Pro 129 RON, Enterprise custom)
-- **Features** (`/functionalitati`): Feature showcase and 8 card types
+- **Home** (`/`): Hero section, interactive card preview with configurable mockup images, benefits, testimonials
+- **Pricing** (`/preturi`): Single plan model with 3 billing options (Lunar, Trimestrial, Anual)
+- **Features** (`/functionalitati`): Feature showcase and 8 card types with auto-scrolling carousel
 - **Solutions** (`/solutii`): Industry-specific solutions with tab navigation (9 industries: Cafenele, Saloane, Restaurante, Retail, Fitness, Servicii, Hoteluri/Pensiuni, Studiouri de Tatuaje, Vape Shops)
 - **Integrations** (`/integrari`): Integration partners display
 - **Contact** (`/contact`): Contact form and company information
+- **Termeni și Condiții** (`/termeni-si-conditii`): Comprehensive terms and conditions page
+- **Politica de Confidențialitate** (`/politica-de-confidentialitate`): GDPR-compliant privacy policy
+- **Articole** (`/articole`): Articles and resources page with placeholder content
 
 ## Data Models
 

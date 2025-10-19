@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -17,6 +18,91 @@ import {
   Target, 
   Gift 
 } from "lucide-react";
+
+interface CardType {
+  name: string;
+  description: string;
+  icon: React.ReactNode;
+  mockupImage: string;
+}
+
+function CardTypesCarousel({ cardTypes }: { cardTypes: CardType[] }) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    let scrollPosition = 0;
+    const scrollSpeed = 0.5;
+    let animationFrameId: number;
+
+    const autoScroll = () => {
+      scrollPosition += scrollSpeed;
+      
+      if (scrollPosition >= scrollContainer.scrollWidth / 2) {
+        scrollPosition = 0;
+      }
+      
+      scrollContainer.scrollLeft = scrollPosition;
+      animationFrameId = requestAnimationFrame(autoScroll);
+    };
+
+    animationFrameId = requestAnimationFrame(autoScroll);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  const duplicatedCards = [...cardTypes, ...cardTypes];
+
+  return (
+    <div className="relative overflow-hidden" data-testid="card-types-carousel">
+      <div 
+        ref={scrollContainerRef}
+        className="flex gap-6 overflow-x-hidden pb-4"
+        style={{ scrollBehavior: 'auto' }}
+        data-testid="carousel-scroll-container"
+      >
+        {duplicatedCards.map((cardType, idx) => (
+          <div
+            key={idx}
+            className="flex-shrink-0 w-80"
+            data-testid={`carousel-card-${idx}`}
+          >
+            <Card className="overflow-hidden hover-elevate h-full">
+              <div className="relative h-48 bg-gray-200">
+                <img
+                  src={cardType.mockupImage}
+                  alt={cardType.name}
+                  className="w-full h-full object-cover"
+                  data-testid={`carousel-card-image-${idx}`}
+                />
+              </div>
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="text-cardzify-coral" data-testid={`carousel-card-icon-${idx}`}>
+                    {cardType.icon}
+                  </div>
+                  <h3 className="font-bold text-lg" data-testid={`carousel-card-title-${idx}`}>
+                    {cardType.name}
+                  </h3>
+                </div>
+                <p className="text-sm text-gray-600" data-testid={`carousel-card-description-${idx}`}>
+                  {cardType.description}
+                </p>
+              </div>
+            </Card>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Features() {
   const features = [
@@ -63,41 +149,49 @@ export default function Features() {
       name: "Card cu Ștampile",
       description: "Clienții primesc o ștampilă la fiecare achiziție. La 10 ștampile, recompensa este activată.",
       icon: <Check className="w-10 h-10 text-cardzify-coral" />,
+      mockupImage: "https://placehold.co/400x250/B49272/white?text=Card+Stampile",
     },
     {
       name: "Card de Recompense",
       description: "Acumulează puncte în funcție de valoarea achiziției. Punctele pot fi schimbate pe recompense.",
       icon: <Star className="w-10 h-10 text-cardzify-coral" />,
+      mockupImage: "https://placehold.co/400x250/E68673/white?text=Card+Recompense",
     },
     {
       name: "Card Cashback",
       description: "Returnează un procent din valoarea achizițiilor, sub formă de puncte, direct pe cardul clientului.",
       icon: <Wallet className="w-10 h-10 text-cardzify-coral" />,
+      mockupImage: "https://placehold.co/400x250/7FA9C4/white?text=Card+Cashback",
     },
     {
       name: "Card Discount",
       description: "Oferă reduceri permanente sau temporare clienților fideli.",
       icon: <Percent className="w-10 h-10 text-cardzify-coral" />,
+      mockupImage: "https://placehold.co/400x250/D8A0A6/white?text=Card+Discount",
     },
     {
       name: "Card de Membru",
       description: "Acces exclusiv pentru membrii programului tău de fidelitate.",
       icon: <Crown className="w-10 h-10 text-cardzify-coral" />,
+      mockupImage: "https://placehold.co/400x250/8BA888/white?text=Card+Membru",
     },
     {
       name: "Card Coupon",
       description: "Cupoane digitale care pot fi folosite o singură dată pentru a atrage clienți noi.",
       icon: <Ticket className="w-10 h-10 text-cardzify-coral" />,
+      mockupImage: "https://placehold.co/400x250/D47B84/white?text=Card+Coupon",
     },
     {
       name: "Card Multipass",
       description: "Combină mai multe tipuri de carduri într-unul singur pentru flexibilitate maximă.",
       icon: <Target className="w-10 h-10 text-cardzify-coral" />,
+      mockupImage: "https://placehold.co/400x250/9B8FB0/white?text=Card+Multipass",
     },
     {
       name: "Gift Card",
       description: "Card cadou digital pe care clienții îl pot oferi prietenilor și familiei.",
       icon: <Gift className="w-10 h-10 text-cardzify-coral" />,
+      mockupImage: "https://placehold.co/400x250/A78295/white?text=Gift+Card",
     },
   ];
 
@@ -134,15 +228,7 @@ export default function Features() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {cardTypes.map((cardType, idx) => (
-              <Card key={idx} className="p-6 text-center hover-elevate" data-testid={`card-type-${idx}`}>
-                <div className="text-cardzify-coral mb-3 flex justify-center" data-testid={`icon-card-type-${idx}`}>{cardType.icon}</div>
-                <h3 className="font-bold mb-2" data-testid={`title-card-type-${idx}`}>{cardType.name}</h3>
-                <p className="text-sm text-gray-600" data-testid={`description-card-type-${idx}`}>{cardType.description}</p>
-              </Card>
-            ))}
-          </div>
+          <CardTypesCarousel cardTypes={cardTypes} />
 
           {/* CTA Section */}
           <div className="text-center max-w-3xl mx-auto mt-20">

@@ -18,11 +18,11 @@ const cardTypes: Record<CardType, { name: string; icon: React.ReactNode }> = {
   giftcard: { name: "Gift Card", icon: <Check className="w-8 h-8" /> },
 };
 
-const businessData: Record<BusinessType, { name: string; type: CardType; color: string; icon: React.ReactNode; reward: string; description: string }> = {
+const businessData: Record<BusinessType, { name: string; type: CardType; mockupImage: string; icon: React.ReactNode; reward: string; description: string }> = {
   cafenele: {
     name: "The Coffee Bean",
     type: "stamps",
-    color: "#B49272",
+    mockupImage: "https://placehold.co/400x250/B49272/white?text=Cafenea+Card",
     icon: <Coffee className="w-6 h-6" />,
     reward: "A 10-a cafea gratuită",
     description: "Perfect pentru a recompensa clienții fideli cu băuturi gratuite."
@@ -30,7 +30,7 @@ const businessData: Record<BusinessType, { name: string; type: CardType; color: 
   saloane: {
     name: "Glamour Studio",
     type: "discount",
-    color: "#D8A0A6",
+    mockupImage: "https://placehold.co/400x250/D8A0A6/white?text=Salon+Card",
     icon: <Scissors className="w-6 h-6" />,
     reward: "20% discount la al 5-lea serviciu",
     description: "Oferă discounturi sau servicii bonus pentru a crește retenția."
@@ -38,7 +38,7 @@ const businessData: Record<BusinessType, { name: string; type: CardType; color: 
   restaurante: {
     name: "Pizza Palace",
     type: "rewards",
-    color: "#E68673",
+    mockupImage: "https://placehold.co/400x250/E68673/white?text=Restaurant+Card",
     icon: <Pizza className="w-6 h-6" />,
     reward: "Pizza gratuită la 100 puncte",
     description: "Atrage clienți noi cu oferte speciale și recompensează-i pe cei loiali."
@@ -46,7 +46,7 @@ const businessData: Record<BusinessType, { name: string; type: CardType; color: 
   retail: {
     name: "Fashion Store",
     type: "rewards",
-    color: "#A78295",
+    mockupImage: "https://placehold.co/400x250/A78295/white?text=Retail+Card",
     icon: <ShoppingBag className="w-6 h-6" />,
     reward: "Discount 15% la 500 puncte",
     description: "Construiește loialitate pe termen lung cu puncte pentru fiecare achiziție."
@@ -54,7 +54,7 @@ const businessData: Record<BusinessType, { name: string; type: CardType; color: 
   fitness: {
     name: "Power Gym",
     type: "membership",
-    color: "#8BA888",
+    mockupImage: "https://placehold.co/400x250/8BA888/white?text=Fitness+Card",
     icon: <Dumbbell className="w-6 h-6" />,
     reward: "Acces VIP la clase premium",
     description: "Motivează membrii cu beneficii exclusive și recompense pentru obiective."
@@ -62,7 +62,7 @@ const businessData: Record<BusinessType, { name: string; type: CardType; color: 
   servicii: {
     name: "Pro Services",
     type: "discount",
-    color: "#9B8FB0",
+    mockupImage: "https://placehold.co/400x250/9B8FB0/white?text=Servicii+Card",
     icon: <Wrench className="w-6 h-6" />,
     reward: "10% discount la servicii recurente",
     description: "Păstrează clienții aproape cu discount-uri pentru contracte pe termen lung."
@@ -70,7 +70,7 @@ const businessData: Record<BusinessType, { name: string; type: CardType; color: 
   hoteluri: {
     name: "Grand Hotel",
     type: "rewards",
-    color: "#C9A66B",
+    mockupImage: "https://placehold.co/400x250/C9A66B/white?text=Hotel+Card",
     icon: <Hotel className="w-6 h-6" />,
     reward: "Noapte gratuită la 10 sejururi",
     description: "Crește rezervările directe cu puncte pentru fiecare sejur."
@@ -78,7 +78,7 @@ const businessData: Record<BusinessType, { name: string; type: CardType; color: 
   tatuaje: {
     name: "Ink Studio",
     type: "coupon",
-    color: "#D47B84",
+    mockupImage: "https://placehold.co/400x250/D47B84/white?text=Tatuaje+Card",
     icon: <Paintbrush className="w-6 h-6" />,
     reward: "Cupon 50 RON pentru prima sesiune",
     description: "Atrage clienți noi cu cupoane pentru prima vizită."
@@ -86,87 +86,24 @@ const businessData: Record<BusinessType, { name: string; type: CardType; color: 
   vape: {
     name: "Vape Shop",
     type: "cashback",
-    color: "#7FA9C4",
+    mockupImage: "https://placehold.co/400x250/7FA9C4/white?text=Vape+Card",
     icon: <Cloud className="w-6 h-6" />,
     reward: "5% cashback la fiecare comandă",
     description: "Fidelizează clienții cu bani înapoi la fiecare achiziție."
   },
 };
 
-function LoyaltyCard({ business, cardType }: { business: BusinessType; cardType: CardType }) {
+function LoyaltyCardMockup({ business }: { business: BusinessType }) {
   const data = businessData[business];
-  const typeInfo = cardTypes[cardType];
 
   return (
-    <div
-      className="relative w-full aspect-[1.586] p-4 rounded-xl shadow-2xl text-white flex flex-col justify-between transition-all duration-500"
-      style={{ backgroundColor: data.color }}
-      data-testid="card-display"
-    >
-      <div className="flex justify-between items-start">
-        <div>
-          <h3 className="font-bold text-lg" data-testid="text-card-business-name">{data.name}</h3>
-          <p className="opacity-80 text-xs" data-testid="text-card-type">{typeInfo.name}</p>
-        </div>
-        <div className="text-white">{data.icon}</div>
-      </div>
-
-      <div className="flex-grow flex items-center justify-center py-2">
-        {cardType === "stamps" && (
-          <div className="grid grid-cols-5 gap-1">
-            {[...Array(10)].map((_, i) => (
-              <div
-                key={i}
-                className={`w-8 h-8 rounded-full border-2 border-white flex items-center justify-center ${
-                  i < 3 ? "bg-white/20" : ""
-                }`}
-              >
-                {i < 3 && <Check className="w-5 h-5 text-white" />}
-              </div>
-            ))}
-          </div>
-        )}
-        {cardType === "rewards" && (
-          <div className="text-center">
-            <p className="text-4xl font-bold">75</p>
-            <p className="text-xs opacity-80 mt-1">puncte acumulate</p>
-          </div>
-        )}
-        {cardType === "cashback" && (
-          <div className="text-center">
-            <p className="text-4xl font-bold">5%</p>
-            <p className="text-xs opacity-80 mt-1">CASHBACK</p>
-          </div>
-        )}
-        {cardType === "discount" && (
-          <div className="text-center">
-            <p className="text-5xl font-bold">20%</p>
-            <p className="text-xs opacity-80 mt-1">DISCOUNT</p>
-          </div>
-        )}
-        {cardType === "membership" && (
-          <div className="text-center">
-            <p className="text-2xl font-bold">VIP MEMBER</p>
-            <p className="text-xs opacity-80 mt-1">Acces Premium</p>
-          </div>
-        )}
-        {cardType === "coupon" && (
-          <div className="text-center">
-            <p className="text-3xl font-bold">50 RON</p>
-            <p className="text-xs opacity-80 mt-1">CUPON</p>
-          </div>
-        )}
-        {["multipass", "giftcard"].includes(cardType) && (
-          <div className="text-center">
-            <p className="text-2xl font-semibold">{typeInfo.name}</p>
-          </div>
-        )}
-      </div>
-
-      <div>
-        <p className="text-xs opacity-80 mb-1">Recompensă:</p>
-        <p className="font-semibold text-sm" data-testid="text-card-reward">{data.reward}</p>
-      </div>
+    <div className="relative w-full aspect-[1.586] rounded-xl overflow-hidden shadow-2xl transition-all duration-500" data-testid="card-display">
+      <img 
+        src={data.mockupImage} 
+        alt={`${data.name} - ${cardTypes[data.type].name}`}
+        className="w-full h-full object-cover"
+        data-testid="card-mockup-image"
+      />
     </div>
   );
 }
@@ -271,7 +208,7 @@ export default function Home() {
                   <div className="bg-white rounded-[2.5rem] overflow-hidden" style={{ aspectRatio: '9/16' }}>
                     <div className="h-full bg-gradient-to-br from-gray-100 to-gray-200 p-4 flex items-center justify-center">
                       <div className="w-full">
-                        <LoyaltyCard business={selectedBusiness} cardType={selectedCardType} />
+                        <LoyaltyCardMockup business={selectedBusiness} />
                       </div>
                     </div>
                   </div>

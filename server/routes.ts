@@ -30,6 +30,18 @@ const pageMetadata: Record<string, { title: string; description: string }> = {
   '/contact': {
     title: 'Contact Cardzify - Transformă Vizitatorii în Clienți Fideli',
     description: 'Contactează echipa Cardzify pentru o demonstrație personalizată. Descoperă cum cardurile de loialitate digitale pot transforma afacerea ta.'
+  },
+  '/termeni-si-conditii': {
+    title: 'Termeni și Condiții - Cardzify',
+    description: 'Citește termenii și condițiile de utilizare a platformei Cardzify pentru carduri de loialitate digitale.'
+  },
+  '/politica-de-confidentialitate': {
+    title: 'Politica de Confidențialitate - Cardzify',
+    description: 'Află cum Cardzify protejează și gestionează datele tale personale în conformitate cu GDPR.'
+  },
+  '/articole': {
+    title: 'Articole și Resurse - Cardzify',
+    description: 'Descoperă articole utile, sfaturi și cele mai bune practici pentru programele de loialitate digitale.'
   }
 };
 
@@ -126,6 +138,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get('/integrari', servePageWithMeta);
   app.get('/preturi', servePageWithMeta);
   app.get('/contact', servePageWithMeta);
+  app.get('/termeni-si-conditii', servePageWithMeta);
+  app.get('/politica-de-confidentialitate', servePageWithMeta);
+  app.get('/articole', servePageWithMeta);
 
   const httpServer = createServer(app);
 

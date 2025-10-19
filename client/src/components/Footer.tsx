@@ -12,6 +12,12 @@ export default function Footer() {
     { name: "Integrări", href: "/integrari" },
   ];
 
+  const resourceLinks = [
+    { name: "Articole", href: "/articole" },
+    { name: "Termeni și Condiții", href: "/termeni-si-conditii" },
+    { name: "Politica de Confidențialitate", href: "/politica-de-confidentialitate" },
+  ];
+
   return (
     <footer className="bg-cardzify-purple text-white border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -45,6 +51,22 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Resurse */}
+          <div>
+            <h3 className="font-semibold text-lg mb-4" data-testid="heading-footer-resources">Resurse</h3>
+            <ul className="space-y-2">
+              {resourceLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} data-testid={`link-footer-${link.name.toLowerCase().replace(/\s/g, '-')}`}>
+                    <span className="text-gray-300 hover:text-cardzify-coral transition-colors text-sm">
+                      {link.name}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Contact */}
           <div>
             <h3 className="font-semibold text-lg mb-4" data-testid="heading-footer-contact">Contact</h3>
@@ -58,9 +80,6 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* Empty column for spacing (matches the 4-column layout from image) */}
-          <div></div>
         </div>
 
         {/* Copyright */}
