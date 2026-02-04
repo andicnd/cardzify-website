@@ -10,11 +10,11 @@ import Home from "@/pages/Home";
 import Pricing from "@/pages/Pricing";
 import Features from "@/pages/Features";
 import Solutions from "@/pages/Solutions";
-import Integrations from "@/pages/Integrations";
 import Contact from "@/pages/Contact";
 import TermsAndConditions from "@/pages/TermsAndConditions";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import Articles from "@/pages/Articles";
+import SubscriptionAgreement from "@/pages/SubscriptionAgreement";
 
 const pageMetadata: Record<string, { title: string; description: string }> = {
   '/': {
@@ -28,10 +28,6 @@ const pageMetadata: Record<string, { title: string; description: string }> = {
   '/solutii': {
     title: 'Soluții de Loialitate - Cardzify pentru Afacerea Ta',
     description: 'Soluții personalizate de loialitate digitală pentru cafenele, saloane de înfrumusețare și restaurante. Crește fidelizarea clienților cu Cardzify.'
-  },
-  '/integrari': {
-    title: 'Integrări Cardzify - Apple Wallet & Google Wallet',
-    description: 'Integrează Cardzify cu Apple Wallet și Google Wallet pentru a oferi clienților tăi carduri de loialitate digitale accesibile instant pe telefon.'
   },
   '/preturi': {
     title: 'Prețuri Cardzify - Planuri pentru Orice Afacere',
@@ -52,15 +48,19 @@ const pageMetadata: Record<string, { title: string; description: string }> = {
   '/articole': {
     title: 'Articole și Resurse - Cardzify',
     description: 'Descoperă articole utile, sfaturi și cele mai bune practici pentru programele de loialitate digitale.'
+  },
+  '/acord-de-abonament': {
+    title: 'Acord de Abonament - Cardzify',
+    description: 'Citește acordul de abonament pentru serviciile Cardzify.'
   }
 };
 
 function updateMetaTags(pathname: string) {
   const metadata = pageMetadata[pathname] || pageMetadata['/'];
-  
+
   // Update title
   document.title = metadata.title;
-  
+
   // Update or create meta description
   let metaDescription = document.querySelector('meta[name="description"]');
   if (metaDescription) {
@@ -71,7 +71,7 @@ function updateMetaTags(pathname: string) {
     metaDescription.setAttribute('content', metadata.description);
     document.head.appendChild(metaDescription);
   }
-  
+
   // Update or create Open Graph tags
   const ogTags = [
     { property: 'og:title', content: metadata.title },
@@ -82,11 +82,11 @@ function updateMetaTags(pathname: string) {
     { name: 'twitter:title', content: metadata.title },
     { name: 'twitter:description', content: metadata.description }
   ];
-  
+
   ogTags.forEach(tag => {
     const selector = tag.property ? `meta[property="${tag.property}"]` : `meta[name="${tag.name}"]`;
     let metaTag = document.querySelector(selector);
-    
+
     if (metaTag) {
       metaTag.setAttribute('content', tag.content);
     } else {
@@ -104,12 +104,13 @@ function updateMetaTags(pathname: string) {
 
 function App() {
   const [location] = useLocation();
-  
+
   // Update meta tags when location changes (client-side navigation)
   useEffect(() => {
     updateMetaTags(location);
+    window.scrollTo(0, 0);
   }, [location]);
-  
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -121,11 +122,11 @@ function App() {
               <Route path="/preturi" component={Pricing} />
               <Route path="/functionalitati" component={Features} />
               <Route path="/solutii" component={Solutions} />
-              <Route path="/integrari" component={Integrations} />
               <Route path="/contact" component={Contact} />
               <Route path="/termeni-si-conditii" component={TermsAndConditions} />
               <Route path="/politica-de-confidentialitate" component={PrivacyPolicy} />
               <Route path="/articole" component={Articles} />
+              <Route path="/acord-de-abonament" component={SubscriptionAgreement} />
             </Switch>
           </main>
           <Footer />

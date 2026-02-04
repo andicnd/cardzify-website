@@ -187,8 +187,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1" data-testid="label-email">Email</h4>
-                      <p className="text-gray-600" data-testid="text-email-1">contact@cardzify.ro</p>
-                      <p className="text-gray-600" data-testid="text-email-2">suport@cardzify.ro</p>
+                      <p className="text-gray-600" data-testid="text-email-1">info@cardzify.ro</p>
                     </div>
                   </div>
 
@@ -198,23 +197,9 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1" data-testid="label-phone">Telefon</h4>
-                      <p className="text-gray-600" data-testid="text-phone">+40 700 123 456</p>
+                      <p className="text-gray-600" data-testid="text-phone">+40750452182</p>
                       <p className="text-sm text-gray-500 mt-1" data-testid="text-phone-hours">
                         Luni - Vineri: 9:00 - 18:00
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4" data-testid="contact-address">
-                    <div className="bg-cardzify-coral/10 p-3 rounded-lg" data-testid="icon-address">
-                      <MapPin className="w-6 h-6 text-cardzify-coral" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1" data-testid="label-address">Adresă</h4>
-                      <p className="text-gray-600" data-testid="text-address">
-                        Str. Tehnologiei nr. 42
-                        <br />
-                        București, România
                       </p>
                     </div>
                   </div>

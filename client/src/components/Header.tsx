@@ -11,7 +11,6 @@ export function Header() {
     { href: "/", label: "Acasă" },
     { href: "/functionalitati", label: "Funcționalități" },
     { href: "/solutii", label: "Soluții" },
-    { href: "/integrari", label: "Integrări" },
     { href: "/preturi", label: "Prețuri" },
     { href: "/contact", label: "Contact" },
   ];
@@ -30,24 +29,23 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className={`transition-colors ${
-                location === item.href
-                  ? "text-white font-semibold"
-                  : "text-gray-300 hover:text-white"
-              }`}
+              className={`transition-colors ${location === item.href
+                ? "text-white font-semibold"
+                : "text-gray-300 hover:text-white"
+                }`}
               data-testid={`link-nav-${item.label.toLowerCase()}`}
             >
               {item.label}
             </Link>
           ))}
-          <Link href="/preturi">
+          <a href="https://app.cardzify.pro/registration" target="_blank" rel="noopener noreferrer">
             <Button
               className="bg-cardzify-coral text-white hover:bg-cardzify-coral/90 transition-all hover:-translate-y-0.5 shadow-lg"
               data-testid="button-cta-header"
             >
               Creează card gratuit
             </Button>
-          </Link>
+          </a>
         </nav>
 
         <button
@@ -70,11 +68,10 @@ export function Header() {
               key={item.href}
               href={item.href}
               onClick={() => setMobileMenuOpen(false)}
-              className={`block py-2 transition-colors ${
-                location === item.href
-                  ? "text-white font-semibold"
-                  : "text-gray-300"
-              }`}
+              className={`block py-2 transition-colors ${location === item.href
+                ? "text-white font-semibold"
+                : "text-gray-300"
+                }`}
               data-testid={`link-mobile-${item.label.toLowerCase()}`}
             >
               {item.label}

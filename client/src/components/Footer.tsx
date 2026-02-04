@@ -9,17 +9,17 @@ export default function Footer() {
     { name: "Funcționalități", href: "/functionalitati" },
     { name: "Soluții", href: "/solutii" },
     { name: "Prețuri", href: "/preturi" },
-    { name: "Integrări", href: "/integrari" },
   ];
 
   const resourceLinks = [
     { name: "Articole", href: "/articole" },
     { name: "Termeni și Condiții", href: "/termeni-si-conditii" },
     { name: "Politica de Confidențialitate", href: "/politica-de-confidentialitate" },
+    { name: "Acord de Abonament", href: "/acord-de-abonament" },
   ];
 
   return (
-    <footer className="bg-cardzify-purple text-white border-t border-white/10">
+    <footer className="bg-cardzify-purple text-white border-t border-white/10 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Cardzify Brand */}

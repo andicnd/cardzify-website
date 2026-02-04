@@ -62,7 +62,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const indexPath = path.resolve(distPath, "index.html");
 
       let html = await fs.promises.readFile(indexPath, "utf-8");
-      
+
       // Replace title and description
       html = html.replace(
         /<title>.*?<\/title>/,
@@ -72,7 +72,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         /<meta name="description" content=".*?" \/>/,
         `<meta name="description" content="${metadata.description}" />`
       );
-      
+
       // Add Open Graph and Twitter tags
       const ogTags = `
     <meta property="og:title" content="${metadata.title}" />
@@ -82,9 +82,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${metadata.title}" />
     <meta name="twitter:description" content="${metadata.description}" />`;
-      
+
       html = html.replace('</head>', `${ogTags}\n  </head>`);
-      
+
       res.status(200).set({ "Content-Type": "text/html" }).send(html);
     } catch (error) {
       next();
@@ -94,7 +94,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = contactFormSchema.parse(req.body);
       const contactMessage = await storage.createContactMessage(validatedData);
-      
+
+      // Forward to Google Sheets if URL is configured
+      const sheetsUrl = process.env.GOOGLE_SHEETS_URL;
+      if (sheetsUrl) {
+        console.log("Forwarding message to Google Sheets...");
+        try {
+          // Fire and forget (don't block the user response)
+          fetch(sheetsUrl, {
+            method: 'POST',
+            body: JSON.stringify(validatedData),
+            headers: { 'Content-Type': 'application/json' },
+          })
+            .then(async (sheetsResponse) => {
+              const responseText = await sheetsResponse.text();
+              if (!sheetsResponse.ok) {
+                console.error("Google Sheets response not OK:", sheetsResponse.status, sheetsResponse.statusText);
+                console.error("Response body:", responseText);
+              } else {
+                console.log("Google Sheets response OK. Response body:", responseText);
+              }
+            })
+            .catch(err => console.error("Error forwarding to Google Sheets:", err));
+        } catch (e) {
+          console.error("Failed to initiate Google Sheets forward:", e);
+        }
+      } else {
+        console.warn("GOOGLE_SHEETS_URL not configured. Skipping Google Sheets forward.");
+      }
+
       res.status(201).json({
         success: true,
         message: "Mesajul a fost trimis cu succes!",
