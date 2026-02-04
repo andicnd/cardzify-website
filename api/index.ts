@@ -1,7 +1,4 @@
-import express, { type Request, Response, NextFunction } from "express";
 import { z, ZodError } from "zod";
-import fs from "fs";
-import path from "path";
 
 // Inline schema to avoid module resolution issues in Vercel
 const contactFormSchema = z.object({
@@ -11,11 +8,6 @@ const contactFormSchema = z.object({
     message: z.string().min(10, "Mesajul trebuie să aibă cel puțin 10 caractere"),
 });
 
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-// Contact form storage (in-memory for serverless)
 interface ContactMessage {
     id: string;
     name: string;
@@ -27,8 +19,12 @@ interface ContactMessage {
 
 const contactMessages: ContactMessage[] = [];
 
-// API Routes
-app.post("/api/contact", async (req, res) => {
+export default async function handler(req: any, res: any) {
+    // Only handle POST requests to /api/contact
+    if (req.method !== 'POST') {
+        return res.status(405).json({ message: 'Method not allowed' });
+    }
+
     try {
         const validatedData = contactFormSchema.parse(req.body);
 
@@ -69,15 +65,4 @@ app.post("/api/contact", async (req, res) => {
             });
         }
     }
-});
-
-// Serve static files from dist/public
-const distPath = path.join(process.cwd(), "dist", "public");
-app.use(express.static(distPath));
-
-// Serve index.html for all other routes (SPA)
-app.get("*", (_req, res) => {
-    res.sendFile(path.join(distPath, "index.html"));
-});
-
-export default app;
+}
