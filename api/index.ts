@@ -1,8 +1,15 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { contactFormSchema } from "../shared/schema";
-import { ZodError } from "zod";
+import { z, ZodError } from "zod";
 import fs from "fs";
 import path from "path";
+
+// Inline schema to avoid module resolution issues in Vercel
+const contactFormSchema = z.object({
+    name: z.string().min(2, "Numele trebuie să aibă cel puțin 2 caractere"),
+    email: z.string().email("Email invalid"),
+    phone: z.string().optional(),
+    message: z.string().min(10, "Mesajul trebuie să aibă cel puțin 10 caractere"),
+});
 
 const app = express();
 app.use(express.json());
