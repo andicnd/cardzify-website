@@ -44,7 +44,7 @@ export default function SubscriptionAgreement() {
 
                             <h3 className="text-xl font-bold text-gray-900 mt-10 mb-4">3. Disponibilitate (SLA).</h3>
                             <p className="text-gray-600 mb-6">
-                                Cardzify depune eforturi comerciale rezonabile pentru a asigura disponibilitatea Serviciilor în proporție de 99,8% din timp (excluzând mentenanța programată sau cauzele de Forță Majoră). Clientul înțelege că Cardzify acționează ca reseller pentru o infrastructură tehnică terță și că disponibilitatea efectivă depinde de furnizorul de tehnologie (Boomerangme). În cazul în care disponibilitatea scade sub acest standard timp de două luni consecutive, Clientul poate solicita rezilierea abonamentului și restituirea pro-rata a sumelor plătite în avans.
+                                Cardzify depune eforturi comerciale rezonabile pentru a asigura disponibilitatea Serviciilor în proporție de 99,8% din timp (excluzând mentenanța programată sau cauzele de Forță Majoră). Clientul înțelege că Cardzify acționează ca reseller pentru o infrastructură tehnică terță și că disponibilitatea efectivă depinde de furnizorul de tehnologie. În cazul în care disponibilitatea scade sub acest standard timp de două luni consecutive, Clientul poate solicita rezilierea abonamentului și restituirea pro-rata a sumelor plătite în avans.
                             </p>
 
                             <h3 className="text-xl font-bold text-gray-900 mt-10 mb-4">4. Suport Tehnic.</h3>
