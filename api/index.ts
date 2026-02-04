@@ -39,11 +39,20 @@ export default async function handler(req: any, res: any) {
         // Forward to Google Sheets if URL is configured
         const sheetsUrl = process.env.GOOGLE_SHEETS_URL;
         if (sheetsUrl) {
-            fetch(sheetsUrl, {
-                method: 'POST',
-                body: JSON.stringify(validatedData),
-                headers: { 'Content-Type': 'application/json' },
-            }).catch(err => console.error("Error forwarding to Google Sheets:", err));
+            console.log("Forwarding to Google Sheets:", sheetsUrl);
+            try {
+                const sheetsResponse = await fetch(sheetsUrl, {
+                    method: 'POST',
+                    body: JSON.stringify(validatedData),
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                const responseText = await sheetsResponse.text();
+                console.log("Google Sheets response:", sheetsResponse.status, responseText);
+            } catch (err) {
+                console.error("Error forwarding to Google Sheets:", err);
+            }
+        } else {
+            console.warn("GOOGLE_SHEETS_URL not configured");
         }
 
         res.status(201).json({
