@@ -97,11 +97,11 @@ function CardTypesCarousel({ cardTypes }: { cardTypes: CardType[] }) {
                 <p className="text-gray-600 leading-relaxed mb-6" data-testid={`carousel-card-description-${idx}`}>
                   {cardType.description}
                 </p>
-                <a href={cardType.demoLink} target="_blank" rel="noopener noreferrer">
+                <Link href="https://app.cardzify.pro/auth/register">
                   <Button className="w-full bg-cardzify-purple hover:bg-cardzify-purple/90 text-white rounded-xl py-6 font-bold flex items-center justify-center gap-2">
-                    Instalează Card
+                    Începe gratuit
                   </Button>
-                </a>
+                </Link>
               </div>
             </Card>
           </div>
