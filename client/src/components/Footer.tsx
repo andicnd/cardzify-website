@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Facebook, Instagram, Youtube } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -33,6 +33,39 @@ export default function Footer() {
             <p className="text-gray-300 text-sm" data-testid="text-footer-tagline">
               Transformăm vizitatorii în clienți fideli.
             </p>
+            <div className="flex gap-4 pt-2">
+              <a href="https://www.facebook.com/profile.php?id=61572880710815" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-cardzify-coral transition-colors">
+                <Facebook className="w-5 h-5" />
+                <span className="sr-only">Facebook</span>
+              </a>
+              <a href="https://www.instagram.com/cardzify/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-cardzify-coral transition-colors">
+                <Instagram className="w-5 h-5" />
+                <span className="sr-only">Instagram</span>
+              </a>
+              <a href="https://www.youtube.com/@Cardzify-z7" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-cardzify-coral transition-colors">
+                <Youtube className="w-5 h-5" />
+                <span className="sr-only">Youtube</span>
+              </a>
+              <a href="https://www.tiktok.com/@cardzify" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-cardzify-coral transition-colors">
+                {/* Custom Tiktok Icon */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-5 h-5"
+                >
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                </svg>
+                <span className="sr-only">TikTok</span>
+              </a>
+            </div>
+
           </div>
 
           {/* Navigare */}
